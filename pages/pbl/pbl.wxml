@@ -1,0 +1,199 @@
+<image src="/imgs/about/tips.png" style="width:100%;height:{{windowHeight}}px;z-index:999999;position:fixed;top:0;left:0;opacity:0.85" bindtouchstart='_clickTips' wx:if="{{!haveTips}}">
+</image>
+
+
+<view class="section-top" >
+  <view class="feature-box" wx:if="{{!Dev}}">
+    <view class="btn-toptow" wx:for="{{topTow}}" bindtap='_changeTopTow' data-topTowIndex='{{item}}'>{{item}}
+ 
+    </view>
+    <view class="{{topTowIndex==topTow[0]?'bottom-line-left':'bottom-line-right'}}"></view>
+    <navigator url="../search/search?searchfrom=2" class="search-box">
+      <image src="../../imgs/icon/search_grey.png"></image>搜索笔记，商品和用户
+    </navigator>
+
+    <text class="iconfont icon-camera" bindtap='_writetie' ></text>
+
+
+  </view>
+  <view style='display:flex;background:#f5f5f5' wx:if="{{topTowIndex==topTow[1]}}">
+    <!-- 发现分类 -->
+    <scroll-view scroll-x="true" class="section-category">
+      <view class="top-category-box" style='width:{{category.length*50}}px'>
+        <text wx:for="{{category}}" data-tabIndex="{{index}}" bindtap='_changeTab' class="top-category {{tabIndex==index?'top-category-index':''}}">{{item.name}}</text>
+      </view>
+
+    </scroll-view>
+    <image src="/imgs/icon/addcate.png" class="btn-changeCategory" bindtap='changeCategory'></image>
+  </view>
+</view>
+<!-- 发现标签 -->
+<view class="page-category" wx:if="{{showCategory}}" style='width:{{windowWidth}}px;height:{{windowHeight}}px;'>
+  <view style='width:100rpx;height:50rpx;font-size:50rpx;text-align:center;line-height:50rpx' bindtap='changeCategory'>×</view>
+  <view class="markTitle">
+    <text space='ensp'>我感兴趣的</text>
+  </view>
+  <view class="mark-section">
+    <view wx:for="{{category}}" class="markBox {{item.choosed?'marked':''}}" data-index="{{index}}">{{'#'+item.name}}
+      <view class="btn-delete" wx:if="{{index>1}}" bindtap="_deleteMark" data-index="{{index}}">×</view>
+    </view>
+  </view>
+
+  <view class="markTitle">
+    <text space='ensp'>其它标签</text>
+  </view>
+  <view class="mark-section">
+    <view wx:for="{{otherCategory}}" class="markBox {{item.choosed?'marked':''}}" bindtap='_chooseMark' data-index="{{index}}">{{'+'+item.name}}
+    </view>
+  </view>
+
+</view>
+<!-- 发现区域 -->
+<view wx:if="{{topTowIndex==topTow[1]}}" class="section-discover">
+
+  <!-- 发现内容 -->
+
+  <view style="width:100%">
+    <!-- 左栏 -->
+    <view class="loading-gif" wx:if="{{loadingCount&&pageIndex<2&&reload}}">
+      <image src="../../imgs/icon/loading-gif.gif"></image>
+    </view>
+    <view class="img_item">
+      <view wx:for="{{col1}}" wx:key="id">
+        <view class="article-box" style="margin-right:2%;" bindtap='_look_article' data-id='{{item.id}}'>
+          <image src="{{item.items[0].img_url}}" style="width:100%;height:{{item.height}}px;border-radius:6rpx;"></image>
+          <view class="content">
+            <view class="title">
+              <view class="content-topic">{{item.content}}</view>
+
+              <view style='width:14%;height:100%;' catchtap='_PlayRecorder' data-url="{{item.recorder[0].recorder_url}}" wx:if="{{item.recorder[0]}}">
+                <image src="../../imgs/icon/recorder-over.png" class="btn-recorder"></image>
+                   <image src="/imgs/icon/tip.gif" class="img-tip" style="width:50rpx;height:40rpx;transform:rotate(-90deg);"></image>
+              </view>
+
+            </view>
+            <view class="content-bottom">
+              <view class="author">
+                <image src="{{item.avatarUrl}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
+              </view>
+              <view class="praise">
+                <text class="iconfont {{item.praisepeople[0]?'icon-collected':'icon-collecte'}}" catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}' data-col='{{1}}'> {{item.praise_num}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 右栏 -->
+    <view class="img_item">
+      <view wx:for="{{col2}}" wx:key="id">
+        <view class="article-box" style="margin-left:2%" bindtap='_look_article' data-id='{{item.id}}'>
+          <image src="{{item.items[0].img_url}}" style="width:100%;height:{{item.height}}px;border-radius:6rpx"></image>
+          <view class="content">
+            <view class="title">
+
+              <view class="content-topic">{{item.content}}</view>
+
+              <view style='width:14%;height:100%;' catchtap='_PlayRecorder' data-url="{{item.recorder[0].recorder_url}}" wx:if="{{item.recorder[0]}}">
+                <image src="../../imgs/icon/recorder-over.png" class="btn-recorder"></image>
+                <image src="/imgs/icon/tip.gif" class="img-tip" style="width:50rpx;height:40rpx;transform:rotate(-90deg);" ></image>
+              </view>
+            </view>
+
+            <view class="content-bottom">
+              <view class="author">
+                <image src="{{item.avatarUrl}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
+              </view>
+              <view class="praise">
+                <text class="iconfont {{item.praisepeople[0]?'icon-collected':'icon-collecte'}}" catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}' data-col='{{2}}'> {{item.praise_num}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="loading-gif" wx:if="{{loadingCount&&pageIndex>2}}">
+    <image src="../../imgs/icon/loading-gif.gif"></image>
+  </view>
+
+</view>
+<!-- 关注内容 -->
+<view wx:else class="section-attention">
+  <block wx:for="{{attentionArticleList}}">
+    <view class="AA-greyline"></view>
+    <view class="atention-article" bindtap='_look_article' data-id='{{item.id}}'>
+      <view class="article-top">
+        <image src="{{item.avatarUrl}}" catchtap='_personPage' data-personid='{{item.user_id}}'></image>
+        <view class="AA-toptext">
+          <text class="AA-author">{{item.author}}</text>
+          <text class="AA-formatTime">{{item.formatTime}}</text>
+        </view>
+      </view>
+      <view class="article-main">
+        <text class="AA-topic">{{item.content}}</text>
+        <!-- <text class="AA-content">{{item.content}}</text> -->
+        <image src="{{item.items[0].img_url}}" mode="aspectFill"></image>
+      </view>
+      <view class="article-feature">
+        <button open-type='share' class="Summary_Forward" catchtap='_Forward' data-item='{{item}}' data-id='{{item.id}}'>
+          <image src="/imgs/icon/zhuanfa.png"></image> {{item.forward_num}}
+        </button>
+        <text class="iconfont icon-message" space='nbsp'> {{item.comment_num}}</text>
+        <text class="iconfont {{item.praisepeople[0]?'icon-aixined':'icon-aixin'}}" space='nbsp' catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}'> {{item.praise_num}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{index==0}}">
+      <view class="AA-greyline"></view>
+      <view class="recommended-background">
+        <text space='nbsp'>   你可能感兴趣的用户</text>
+        <scroll-view scroll-x='true' style='width:{{windowWidth}}px;background:#ffffff'>
+          <view class="recommended-scrollbox">
+            <view class="recommended-box" wx:for="{{recommendedList}}">
+              <image src="{{item.avatarUrl}}" catchtap='_personPage' data-personid='{{item.uid}}'></image>
+              <view class="recommended-main">
+                <text class="recommended-name">{{item.nickname}}</text>
+                <view class="recommended-bt {{item.attentioned?'recommended-had':''}}" data-id="{{item.uid}}" data-index='{{index}}' catchtap='_attention'>关注</view>
+                <!-- <view class="recommended-had" wx:else data-id="{{item.uid}}" data-index='{{index}}' catchtap='_attention'>已关注</view> -->
+              </view>
+            </view>
+          </view>
+
+        </scroll-view>
+      </view>
+    </view>
+  </block>
+  <view wx:if="{{attentionArticleList.length==0}}">
+    <view class="AA-greyline"></view>
+    <view class="recommended-background">
+      <text space='nbsp'>   你可能感兴趣的用户</text>
+      <scroll-view scroll-x='true' style='width:{{windowWidth}}px;background:#ffffff'>
+        <view class="recommended-scrollbox">
+          <view class="recommended-box" wx:for="{{recommendedList}}">
+            <image src="{{item.avatarUrl}}" catchtap='_personPage' data-personid='{{item.uid}}'></image>
+            <view class="recommended-main">
+              <text class="recommended-name">{{item.nickname}}</text>
+              <view class="recommended-bt" wx:if="{{!item.attentioned}}" data-id="{{item.uid}}" data-index='{{index}}' catchtap='_attention'>关注</view>
+              <view class="recommended-had" wx:else data-id="{{item.uid}}" data-index="{{index}}" catchtap='_attention'>已关注</view>
+            </view>
+          </view>
+        </view>
+
+      </scroll-view>
+    </view>
+  </view>
+</view>
+
+<!-- 遮罩层 -->
+<view class="page-modal" style="top:{{windowHeight*4/9}}px;left:{{(windowWidth-100)/2}}px;" wx:if="{{playing}}">
+  <view class="section-modal">
+    <image src="{{soundImg}}" class="sound-animation"></image>
+    {{soundTips}}
+  </view>
+</view>
+
+<view style="display:none">
+  <image wx:for="{{loadimgs}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" binderror="_TTTTT" bindload="onImageLoad" lazy-load='true'></image>
+</view>
+<audio src="{{src}}" id="myAudio"></audio>

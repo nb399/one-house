@@ -1,0 +1,47 @@
+<view class="loading_page" wx:if="{{!loading}}">
+</view>
+
+<view class="container">
+  <!--轮播图-->
+  <swiper indicator-dots="true" autoplay="true" class="swiper-banner" circular current="{{swiperIndex}}" bindchange='_swiperChange'>
+    <block wx:for="{{bannerArr}}">
+      <swiper-item class="banner-item" data-id="{{item.hcf_themeid}}" data-name="{{item.name}}" bindtap="onThemesItemTap">
+        <image mode="aspectFill" class="item-image" src="{{item.img.url}}">
+        </image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <wux-search-bar clear maxlength="8" />
+  <view class="page__bd">
+    <view class="filter-section">
+      <picker bindchange="buildTypeChange" value="{{buildTypesIndex}}" range="{{buildTypes}}" range-key="title" class="filter-box">
+        <view >
+         {{buildTypes[buildTypesIndex].title }} ▽
+        </view>
+      </picker>
+      <picker bindchange="buildAreaChange" value="{{buildAreasIndex}}" range="{{buildAreas}}" range-key="title" class="filter-box">
+        <view >
+          {{buildAreas[buildAreasIndex].title }} ▽
+        </view>
+      </picker>
+    </view>
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{ buildingList }}" wx:key="" bindtap='goBuildingDetail' id="{{item.id}}">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg fang-list-thumb">
+            <image class="weui-media-box__thumb" src="{{ item.poster_url }}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">{{ item.name }}</view>
+            <text class="fang-list-build-type">{{ item.build_type }}</text>
+            <view class="weui-media-box__info fang-list-info">
+              <view class="weui-media-box__info__meta">{{ item.area_type }}</view>
+              <view class="weui-media-box__info__meta">￥{{ item.price }}</view>
+              <view class="weui-media-box__info__meta">{{ item.update_time }}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

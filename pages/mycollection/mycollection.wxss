@@ -1,0 +1,44 @@
+/* pages/mycollection/mycollection.wxss */
+@import "../tpls/products/products-tpl.wxss";
+.topTab{
+  width: 100%;
+  display: flex;
+  height: 80rpx;
+}
+.tabOne{
+  width: 50%;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom:1rpx solid #d1d1d1; 
+}
+.tabIndex{
+  background: #d1d1d1;
+}
+.section-attention{
+  width: 92%;
+  margin: 0 auto;
+}
+.box-attention{
+  display: flex;
+  height: 150rpx;
+  width: 100%;
+  align-items: center;
+}
+.attention-avatar{
+  width: 108rpx;
+  height: 108rpx;
+  border-radius:80rpx;
+  flex: 0 0 auto;
+}
+.attention-main{
+  font-size: 22rpx;
+  font-weight: 600;
+  padding: 0 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #d1d1d1;
+  flex: 0 1 100%;
+  height: 150rpx;
+}

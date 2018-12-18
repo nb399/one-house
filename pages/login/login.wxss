@@ -1,0 +1,14 @@
+/* pages/login/login.wxss */
+.section-tips{
+  width: 60%;
+  height: 400rpx;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 200rpx auto;
+}
+text{
+  text-align:  center;
+  padding: 50rpx;
+}

@@ -1,0 +1,138 @@
+/* pages/attention-people/attention-people.wxss */
+.loading-gif{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200rpx;
+  width: 100%;
+}
+.loading-gif image{
+  width: 20rpx;
+  height: 20rpx;
+}
+.userinfo-avatar {
+  
+  margin: 20rpx;
+  border-radius: 50%;
+  width: 160rpx;
+  height: 160rpx;
+  bottom:-30rpx;
+  left:300rpx;
+}
+.userinfo-avatar_bg{
+  width:100%;
+  height:400rpx;
+  filter: blur(10rpx);
+}
+.userInfo{
+  position:relative;
+   
+}
+.userInfo_main{
+   display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: space-around;
+  top:20rpx;
+  left:280rpx;
+  position:absolute;
+  color: #ffffff;
+  font-size: 32rpx;
+  height: 360rpx;
+}
+.btn-attention{
+  background: #fff;
+  color: #FF2741;
+  font-weight: bold;
+  height: 52rpx;
+  width: 106rpx;
+  text-align: center;
+  line-height: 52rpx;font-size: 22rpx;
+  border-radius: 6rpx;
+}
+
+
+/* 瀑布流 */
+/* 单个图片容器的样式 */
+.img_item {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+.article-box{
+  border-radius: 6rpx;
+  box-shadow: 0 0 15rpx 0.6rpx rgba(0,0,0,0.16);
+  margin: 4%;
+}
+.title{
+  height: 80rpx;
+  overflow: hidden;
+  font-size: 28rpx;
+  width: 90%;
+  margin-left: 10rpx;
+}
+.content-bottom{
+display: flex;
+flex-direction: row;
+height: 70rpx;
+align-items: center;
+justify-content: space-between;
+}
+.author{
+  display: flex;
+  font-size: 22rpx;
+  align-items: center; 
+}
+.avatarUrl{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 30rpx;
+  margin:0 10rpx;
+}
+.praise{
+  margin-right:10rpx; 
+  display: flex;
+  align-items: center;
+  font-size: 22rpx;
+  color: #a2a2a2;
+}
+.praise image{
+  width: 35rpx;
+  height: 35rpx;
+  margin-right: 10rpx;
+
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-aixined:before{
+  content:"\e688";
+  color: #FF2741;
+}
+.icon-aixin:before{
+  content:"\e688";
+  color: #d1d1d1;
+}
+.icon-message:before{
+  content:"\e604";
+  color: #d1d1d1;
+}
+.icon-collected:before{
+  content:"\e600";
+  font-size:22rpx;
+  color: #FF2741;
+}
+.icon-collecte:before{
+   content:"\e601";
+  font-size:22rpx;
+  color: #d1d1d1;
+}
+.icon-location::before{
+  content:"\e660";
+   font-size:22rpx;
+  color: #d1d1d1;
+}

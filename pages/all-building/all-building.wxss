@@ -1,0 +1,37 @@
+/* pages/all-building/all-building.wxss */
+/* filter */
+.filter-section{
+  display: flex;
+  height: 100rpx;
+  width: 100%;
+  align-items: center;
+  border-bottom: 1rpx solid #eee;
+}
+.filter-section > .filter-box:nth-child(1){
+border-right: 1rpx solid #eee
+}
+.filter-box{
+  flex: 1 1 50%;
+  line-height: 60rpx;
+  text-align: center;
+}
+/* banner */
+.item-image{
+  width: 750rpx;
+  height: 400rpx;
+}
+/* list */
+.fang-list-thumb{
+  width: 200rpx;
+  height: 150rpx
+}
+.fang-list-build-type{
+background:#fc5459;
+color:#fff;
+padding:6rpx 20rpx;
+font-size: 26rpx;
+} 
+.fang-list-info{
+  margin-top: 14rpx;
+  color: grey;
+}

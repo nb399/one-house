@@ -1,0 +1,31 @@
+<!--pages/myarticle/myarticle.wxml-->
+<view class="community-box" wx:if="{{articleArr[0]}}">
+  <block wx:for="{{articleArr}}" >
+    <!-- <view bindtap='look_article' class="article_box" id="{{item.id}}">{{item.content}}</view> -->
+    <view class="Summary_box">
+      <view class="Summary_box_top">
+        <view class="Summary_box_top_img">
+          <image src="{{item.avatarUrl}}"></image>
+        </view>
+        <view class="author_box">{{item.author}}</view>
+        <view class="article_time">{{item.create_time}}</view>
+        <view class="delete" data-id="{{item.id}}" bindtap="_delete_article">×</view>
+      </view>
+      <view class="Summary_box_main" bindtap='look_article' id="{{item.id}}">
+      <view class="Summary_box_main_text">{{item.summary}}</view>
+      
+          <view class="Summary_box_main_imgbox">
+      <image src="{{imgitem.img_url}}"  wx:if="{{index<5}}" wx:for="{{item.items}}" wx:for-item="imgitem"></image>
+      </view>
+      </view>
+       
+      
+      <view class="Summary_box_bottom">
+        <view style='border-right:1rpx solid #d1d1d1' bindtap='look_article' id="{{item.id}}">{{item.comment_num+' '}}评论</view>
+        <view>{{item.praise_num+' '}}赞</view>
+      </view>
+    </view>
+  </block>
+ 
+</view>
+ <view wx:else style='text-align:center;color:#d1d1d1;margin-top:80rpx'>-还没有发帖-</view>

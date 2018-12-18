@@ -1,0 +1,23 @@
+/* pages/message/message.wxss */
+.section{
+  width: 690rpx;
+  height: 162rpx;
+  margin: 28rpx auto;
+  box-shadow: 0 6rpx 20rpx 5rpx rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 18%;
+}
+.right{
+  width: 74%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

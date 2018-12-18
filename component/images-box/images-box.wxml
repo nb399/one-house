@@ -1,0 +1,18 @@
+<!--components/images-box/images-box.wxml-->
+<view class="imgs-box">
+  <block wx:if="{{imgs.length==1}}" wx:for="{{imgs}}">
+    <image class="imgs-1" src="{{item}}" mode='aspectFill'></image>
+  </block>
+  <block wx:if="{{imgs.length==2}}" wx:for="{{imgs}}">
+    <image class="imgs-2" src="{{item}}" mode='aspectFill'></image>
+  </block>
+  <block wx:if="{{imgs.length==3}}" wx:for="{{imgs}}">
+    <image class="{{index==0?'imgs-3-1':'imgs-3-2'}}" src="{{item}}" mode='aspectFill'></image>
+  </block>
+      <block wx:if="{{imgs.length==4}}" wx:for="{{imgs}}">
+    <image class="imgs-4" src="{{item}}" mode='aspectFill'></image>
+  </block>
+    <block wx:if="{{imgs.length==5}}" wx:for="{{imgs}}">
+    <image class="{{index<2?'imgs-5-1':'imgs-5-2'}}" src="{{item}}" mode='aspectFill'></image>
+  </block>
+</view>

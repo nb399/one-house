@@ -1,0 +1,63 @@
+{
+  "pages": [
+    "pages/pbl/pbl",
+    "pages/home/home",
+    "pages/login/login",
+    "pages/attention-people/attention-people",
+    "pages/search/search",
+    "pages/message/message",
+    "pages/myorder/myorder",
+    "pages/copywriting/copywriting",
+    "pages/mycollection/mycollection",
+    "pages/all-building/all-building",
+    "pages/one-building/one-building",
+    "pages/publish/publish",
+    "pages/myarticle/myarticle",
+    "pages/article/article",
+    "pages/product/product",
+    "pages/theme/theme",
+    "pages/category/category",
+    "pages/cart/cart",
+    "pages/order/order",
+    "pages/pay-result/pay-result",
+    "pages/my/my",
+    "pages/community/community"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "好好看房",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "imgs/toolbar/home.jpg",
+        "selectedIconPath": "imgs/toolbar/home@selected.jpg"
+      },
+      {
+        "pagePath": "pages/pbl/pbl",
+        "iconPath": "imgs/toolbar/community.png",
+        "selectedIconPath": "imgs/toolbar/community@selected.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "imgs/toolbar/my.png",
+        "selectedIconPath": "imgs/toolbar/my@selected.png",
+        "text": "我的"
+      }
+    ],
+    "borderStyle": "black",
+    "selectedColor": "#fc5459",
+    "color": "#A2A2A2",
+    "backgroundColor": "#ffffff"
+  },
+  "networkTimeout": {
+    "request": 20000
+  }
+}

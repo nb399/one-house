@@ -1,0 +1,85 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.4.1",
+	"appid": "wxed9e2a27e34c9148",
+	"projectname": "fang_dev",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 7,
+			"list": [
+				{
+					"id": 0,
+					"name": "11",
+					"pathName": "pages/home/home",
+					"query": "personid=6"
+				},
+				{
+					"id": 1,
+					"name": "publish",
+					"pathName": "pages/publish/publish",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "11",
+					"pathName": "pages/article/article",
+					"query": "article_id=407"
+				},
+				{
+					"id": 3,
+					"name": "video",
+					"pathName": "pages/video/video",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "mycollection",
+					"pathName": "pages/mycollection/mycollection",
+					"query": ""
+				},
+				{
+					"id": 5,
+					"name": "search",
+					"pathName": "pages/category/category",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "全部楼盘",
+					"pathName": "pages/all-building/all-building",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "楼盘详情",
+					"pathName": "pages/one-building/one-building",
+					"query": "build_id=10001"
+				}
+			]
+		}
+	}
+}

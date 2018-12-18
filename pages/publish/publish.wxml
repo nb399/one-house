@@ -1,0 +1,80 @@
+<!--pages/publish/publish.wxml-->
+
+<!-- 声音遮罩层 -->
+<view class="page-modal" style="top:{{windowHeight*1/3}}px;left:{{(windowWidth-100)/2}}px;" wx:if="{{playing}}">
+  <view class="section-modal">
+    <image src="{{soundImg}}" class="sound-animation"></image>
+    {{soundTips}}
+  </view>
+</view>
+
+
+<view class="page-bookmark" wx:if="{{chooseMark}}">
+  <view class="markTitle">
+    <text space='ensp'>选择你的标签\n发布理想生活的线索</text>
+  </view>
+  <view class="mark-section">
+    <text wx:for="{{category}}" class="markBox {{item.choosed?'marked':''}}" bindtap='_chooseMark' data-index="{{index}}" wx:if="{{index>1}}">{{'#'+item.name}}</text>
+  </view>
+  <view class="btn-nextStep" bindtap='_nextStep'>下一步</view>
+
+</view>
+<view class="publish-page" wx:else>
+  <view class="AA-greyline"></view>
+  <view class="topic_box">
+    <input class="topic_cin" placeholder="添加标题" bindinput='_cintopicremember' value="{{user_cintopic}}" maxlength='25'></input>
+  </view>
+
+
+  <view class="publish_box">
+
+    <textarea class="publish_cin" bindinput='_cinremember' value="{{user_cin}}" placeholder="聊聊好生活是怎么玩出来的吧~" maxlength='5000'></textarea>
+<view class="location-box">
+  <view class="btn-location" bindtap='chooseLocation'><text class="iconfont icon-publish-location"></text>{{locationName?locationName:'你在哪里？'}}
+    <view class="btn-reset" wx:if="{{locationName}}" catchtap='resetLocation'>x</view>
+    </view></view>
+  
+    <!-- 录音  -->
+
+    <view class="section-recorder">
+      <audio src="{{src}}" id="myAudio"></audio>
+      <view class="recorder-tips">
+        <view style="font-size:30rpx;line-height:70rpx;border-bottom:1rpx solid #d1d1d1;">按下开始录音</view>
+        <view style="font-size:24rpx;color:#d1d1d1;line-height:50rpx">共可录制10秒钟</view>
+      </view>
+      <text class="iconfont icon-start" bindtap="_Recorder" wx:if="{{recording==0}}"></text>
+      <text class="iconfont icon-stop" bindtap="_StopRecorder" wx:if="{{recording==1}}"></text>
+      <image class="recorder-redo" src="/imgs/icon/redo.png" bindtap="_ReRecorder" wx:if="{{recording==2}}"></image>
+      <image src="/imgs/icon/player.png" class="recorder-player" bindtap="_PlayRecorder" wx:if="{{recording==2}}"></image>
+
+    </view>
+
+    <view class="section-progress">
+      <image src="/imgs/icon/progress.png" style="width:650rpx;height:20rpx;"></image>
+      <view class="recorder-progress {{recording!=0?'running':''}}" style="animation-play-state:{{recording==2?'paused':''}}">{{recorderDuration?recorderDuration+'s':''}}</view>
+    </view>
+
+
+    <view class="imgs_box">
+      <image src="{{item}}" wx:for="{{tempFilePaths}}" bindtap='_previewimg' data-url="{{item}}" mode='aspectFill' style="margin-right:{{index==4||index==9?0:'20rpx'}}"></image>
+      <image src="/imgs/icon/choose_img.png" bindtap='_chooseimg' style="margin-right:{{tempFilePaths.length==4||tempFilePaths.length==9?0:'20rpx'}}"></image>
+    </view>
+
+  </view>
+
+  <button bindtap='_publishmy' type="warn">发布</button>
+
+  <!-- <view style="height:50rpx;width:100%;margin:50rpx 0">
+<view style="height:50rpx;background:green;width:{{progress}}%"></view>
+</view> -->
+
+  <!-- <view class="wrap">
+  <view class="circle-box">
+    <canvas class="circle" style="z-index: -99; width:200rpx; height:200rpx;" canvas-id="canvasCircle">
+    </canvas>
+    <canvas class="circle" style="width:200rpx; height:200rpx;" canvas-id="canvasArcCir">
+    </canvas>
+    <view class="draw_btn" bindtouchstart="drawCircle" bindtouchend="stopCircle">录音</view>
+  </view>
+</view>  -->
+</view>

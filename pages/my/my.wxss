@@ -1,0 +1,96 @@
+@import "../tpls/base.wxss";
+
+
+.my-container{
+    background-color:#EDEDED;
+}
+.my-header{
+  border-top: 1rpx solid #000;
+   width: 690rpx;
+   height: 210rpx;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 30rpx;
+    font-size: 28rpx;
+    background-image: url('https://www.ishtml.com/public/upload/my_bg.gif');
+}
+
+.my-header image{
+    height: 110rpx;
+    width: 110rpx;
+    border-radius: 100rpx;
+    border: 2rpx solid #fff;
+}
+.my-header text{
+    margin-left: 20rpx;
+}
+.my-address{
+    background-color: #fff;
+}
+
+.section{
+    border-bottom:1rpx solid #E9E9E9;
+    margin-left:30rpx;
+    margin-right: 30rpx;
+    height: 90rpx;
+}
+.section:last-child{
+    border-bottom:none;
+}
+.section input{
+    font-size: 28rpx;
+    color:#7C7C7C;
+    padding: 20rpx 30rpx 20rpx 0;
+}
+.section picker{
+    height: 100%;
+    flex: 1;
+}
+.section picker view{
+    width: 100%;
+    height: 90rpx;
+    font-size: 28rpx;
+    color:#7C7C7C;
+    display: flex;
+    align-items: center;
+}
+.section picker view .key{
+    color: #333;
+}
+.section picker view .val{
+    margin-left: 20rpx;
+}
+.section .arrow-icon{
+    flex-basis: 40rpx;
+    background-color: #AB956D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.section .arrow-icon image{
+    height: 32rpx;
+    width: 32rpx;
+}
+
+.own-box{
+    margin-top: 10px;
+    /*border-bottom: 1rpx solid #EDEDED;*/
+}
+
+.item-title{
+    padding: 25rpx 0;
+    color: #999999;
+    text-align: center;
+    border-bottom: 1rpx solid #EDEDED;
+    font-size: 28rpx;
+    background-color: #fff;
+    position: relative;
+}
+.item-title image{
+    position: absolute;
+    transform: rotate(270deg);
+    height: 48rpx;
+    width: 48rpx;
+    right: 10rpx;
+}

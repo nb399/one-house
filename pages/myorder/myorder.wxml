@@ -1,0 +1,5 @@
+<!--pages/myorder/myorder.wxml-->
+
+<import src="../tpls/order/order.wxml" />
+  <template is="order" data="{{orderArr}}" wx:if="{{orderArr[0]}}" />
+  <view wx:else style='text-align:center;color:#d1d1d1;margin-top:80rpx'>-暂无订单-</view>

@@ -1,0 +1,13 @@
+<!--pages/message/message.wxml-->
+<block wx:for="{{message}}">
+<view class="section">
+<view class="left">
+<text style="font-size:28rpx;color:#fc5459;font-weight:bold">{{item.name}}</text>
+<text style="font-size:18rpx;">{{item.publish_time}}</text>
+</view>
+<view class="right">
+<text style='font-size:26rpx;'>{{item.content}}</text>
+</view>
+
+</view>
+</block>

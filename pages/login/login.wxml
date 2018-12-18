@@ -1,0 +1,5 @@
+<!--pages/login/login.wxml-->
+<view class="section-tips">
+<text  wx:if="{{getUserInfoFail}}">{{'小程序需要您的微信授权才能使用哦~'}} </text>
+<button open-type='getUserInfo' bindgetuserinfo="onGotUserInfo" wx:if="{{getUserInfoFail}}">立即授权</button>
+</view>

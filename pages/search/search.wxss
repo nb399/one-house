@@ -1,0 +1,145 @@
+/* pages/search/search.wxss */
+@import "../tpls/community/community.wxss";
+@import "../tpls/products/products-tpl.wxss";
+@import "../tpls/video/video.wxss";
+
+.top-box{
+  width: 690rpx;
+  height: 90rpx;
+  display: flex;
+  padding: 0 30rpx;
+  flex-direction: row;
+  align-items: center;
+  font-size: 26rpx;
+  justify-content: space-between;
+  background: #d1d1d1;
+  color: white;
+
+}
+.search-box{
+  width: 620rpx;
+  height: 60rpx;
+  background: #ffffff;
+  border-radius: 46rpx;
+  display: flex;
+  align-items: center;
+  
+}
+.search-box image{
+  width: 37rpx;
+  height: 39rpx;
+  margin-left: 26rpx;
+  margin-right: 19rpx;
+}
+.search-box input{
+  color: #000000;
+  height: 40rpx;
+  width: 95%;
+  
+}
+.key-box{
+  color: #ec463d;
+  font-size: 26.5rpx;
+  width: 690rpx;
+ margin: 50rpx 30rpx 86rpx 30rpx;
+ display: flex;
+ flex-wrap: wrap;
+ align-items: center;
+ justify-content: space-between;
+}
+.icon-shouqi{
+  width: 26rpx;
+  height: 26rpx;
+   padding-left: 100rpx;
+   padding-right:15rpx; 
+}
+.word-box{
+ 
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+ height: 70rpx;
+  overflow: hidden;
+   
+}
+.key-word2{
+  background: #7a7a7a;
+    width: auto;
+  height: 40rpx;
+  color: white;
+  border-radius: 20rpx;
+  padding: 0 30rpx;
+  margin: 26rpx 10rpx 0 0;   
+  line-height: 40rpx;
+}
+.key-word{
+  width: auto;
+  height: 40rpx;
+  background:  #ec463d;
+  color: white;
+  border-radius: 20rpx;
+  padding: 0 30rpx;
+  margin: 26rpx 10rpx 0 0;   
+  line-height: 40rpx;
+}
+.help-title{
+  margin-left: 30rpx;
+}
+.history-box{
+    color: #7a7a7a;
+  font-size: 26rpx;
+ 
+}
+.boxborder-top{
+  border-top:1rpx solid #d1d1d1; 
+}
+.icon-jilu{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 38rpx;
+  margin-left: 30rpx;
+}
+.grey{
+ background: #7a7a7a;
+}
+.history-word{
+  font-size: 40rpx;
+  padding: 38rpx 0;
+  height: 40rpx;
+  display: flex;
+  color: #000000;
+  align-items: center;
+}
+.btn-clear{
+  margin: 20rpx auto;
+  height: 60rpx;
+  width: 120rpx;
+  border: 1rpx solid #000000;
+  border-radius: 20rpx;
+  line-height: 60rpx;
+  text-align: center;
+
+}
+.history-word text{
+  font-size: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.top-tabBar{
+  display: flex;
+  width: 100%;
+  height: 100rpx;
+  border-bottom: 1rpx #a2a2a2 solid;
+}
+.tabbox{
+  width: 33.3333333%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+
+.border-bottom{
+  color: #7a7a7a;
+  padding-bottom: 20rpx;
+  border-bottom: 6rpx #fc5469 solid;
+}

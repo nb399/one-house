@@ -1,0 +1,175 @@
+
+.home-main-videobox{
+  margin:0;
+
+}
+.home-main-videobox video{
+  width: 100%;
+  height:422rpx;
+
+}
+.home-main-videotext{
+width:100%;
+height: auto; 
+display: flex;
+flex-direction: column;
+align-items: center;
+
+}
+.home-main-videotitle{
+  display: flex;
+  align-items: center;
+justify-content: flex-start;
+border-bottom: 1px solid #a2a2a2;
+width: 690rpx;
+height: 100rpx;
+
+font-size: 40rpx; 
+
+}
+.home-main-videotype{
+ 
+  margin: 30rpx 0;
+  color: #a2a2a2;
+width: 690rpx;
+height: 22rpx;
+font-size: 21rpx;
+}
+.home-main-videocontent{
+ display: -webkit-box;
+overflow: hidden;
+
+text-overflow: ellipsis;
+-webkit-box-orient: vertical;
+-webkit-line-clamp:2;
+font-size: 28rpx;
+color: #a2a2a2;
+width: 690rpx;
+height: 78rpx;
+/* line-height: 42rpx; */
+}
+.home-main-videofeatures{
+
+  font-size: 22rpx;
+  color: #a2a2a2;
+  margin: 30rpx 0;
+width: 690rpx;
+height: auto;
+display: flex;
+align-items: center;
+
+}
+.home-main-video-01{
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+
+}
+.home-main-video-01 image{
+  width: 35rpx;
+  height: 35rpx;
+  margin-right: 10rpx;
+
+}
+.home-main-video-01 .num{
+  margin-right: 20rpx;
+  width: 50rpx
+}
+.home-main-video-detail{
+  border: 1rpx solid #000000;
+  width: 100rpx;
+  height: 46rpx;
+  color: #000000;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 46rpx;
+  margin-left: 368rpx;
+}
+
+
+
+.search-vbox{
+  margin-top: 66rpx;
+}
+.search-vone{
+  margin-bottom: 38rpx;
+  width: 690rpx;
+  height: 384rpx;
+  margin: 38rpx auto;
+  box-shadow: 0 6rpx 20rpx 5rpx rgba(0,0,0,0.1); 
+
+}
+.search-vone image{
+  width: 690rpx;
+  height: 210rpx;
+
+}
+.test{
+    width: 690rpx;
+  height: 210rpx;
+
+}
+.search-vtext{
+  width: 690rpx;
+  height:174rpx;
+
+   
+}
+.search-vtltle{
+    font-size: 34rpx;
+  line-height: 32rpx; 
+ height: 32rpx;
+ width:   616rpx; 
+ letter-spacing: 0;
+margin:0 38rpx 38rpx 36rpx;
+padding-top: 42rpx;
+display: flex;
+align-items: center;
+}
+.search-vfeabox{
+  height: 20rpx;
+  width: 616rpx;
+
+  margin:0 38rpx 0 36rpx; 
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+.search-vtype{
+  font-size: 22rpx;
+  height: 20rpx;
+  line-height: 20rpx;
+  color: #fc5459;
+  width: 100rpx;
+}
+.search-vduration{
+  width: 124rpx;
+  margin: 0 250rpx 0 10rpx;
+ font-size: 22rpx;
+  height: 20rpx;
+  line-height: 20rpx;
+  color: #a2a2a2;
+}
+.search-vshow{
+  margin-left: 26rpx;
+  height: 20rpx;
+  width: 50rpx;
+  display: flex;
+  align-items: center;
+}
+.search-vshow image{
+width: 20rpx;
+  height: 20rpx;
+  margin-right: 10rpx;
+}
+.search-vshow .num{
+  font-size: 22rpx;
+    color: #a2a2a2;
+}
+.search-none{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  color: #a2a2a2;
+  margin-top:50rpx;
+}

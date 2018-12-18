@@ -1,0 +1,45 @@
+
+<view class="container my-container">
+  <view class="my-header">
+    <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../imgs/about/logo.gif'}}"></image>
+    <text class="name">{{userInfo.nickName}}</text>
+  </view>
+  <!--地址管理-->
+  <view class="my-address">
+    <block wx:if="{{addressInfo}}">
+      <view class="item-title" bindtap="editAddress">
+        地址管理
+        <image src="../../imgs/icon/arrow@right.png"></image>
+      </view>
+      <view  class="item-main">
+          <view class="section" >
+            <input disabled name="name" placeholder="姓名" value="{{addressInfo.name+'  '+addressInfo.mobile}}" />
+            <!-- <input disabled type="number" name="mobile" placeholder="手机号码" value="{{addressInfo.mobile}}" style='width:56%'/> -->
+          </view>
+
+          <view class="section">
+            <input disabled name="detail" placeholder="收货地址" value="{{addressInfo.totalDetail}}"/>
+          </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="add-new-address" bindtap="editAddress"><text class="icon">+</text><text>添加地址</text></view>
+    </block>
+  </view>
+  <view class="own-box">
+   <navigator class="my-order" url='../myarticle/myarticle'>
+    <view class="item-title">我的发帖
+     <image src="../../imgs/icon/arrow@right.png"></image></view>
+  </navigator>
+  <navigator class="my-order" url='../mycollection/mycollection'>
+    <view class="item-title">我的收藏
+     <image src="../../imgs/icon/arrow@right.png"></image></view>
+  </navigator>
+  <navigator class="my-order" url="../myorder/myorder">
+    <view class="item-title">我的订单
+     <image src="../../imgs/icon/arrow@right.png"></image></view>
+  </navigator>
+  </view>
+
+  
+</view>

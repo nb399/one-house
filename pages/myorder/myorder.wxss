@@ -1,0 +1,2 @@
+/* pages/myorder/myorder.wxss */
+@import "../tpls/order/order.wxss";

@@ -1,0 +1,56 @@
+<!--pages/search/search.wxml-->
+<import src="../tpls/community/community.wxml" />
+<import src="../tpls/products/products-tpl.wxml" />
+<import src="../tpls/video/video.wxml" />
+
+<view class="top-box">
+  <view class="search-box">
+
+    <image src="/imgs/icon/search_red.png"></image>
+    <input placeholder='请输入关键字' bindinput="_SaveCin" value='{{value}}' bindconfirm="_ComfirmCin" confirm-type="search"></input>
+
+  </view>
+  <view bindtap='_GoBack'>取消</view>
+</view>
+<block wx:if="{{!loading}}">
+<view class="key-box" >
+  <text>热门搜索 </text>
+  <image bindtap="_changeRed" class="icon-shouqi" src="{{!shouqi?'/imgs/icon/shouqi.png':'/imgs/icon/dakai.png'}}"></image>
+  <view class="word-box" wx:if="{{!shouqi}}">
+    <text class="key-word {{index>2?'grey':''}}" wx:for="{{wordList1}}" bindtap="_quickSearch" data-word="{{item}}">{{item}}
+    </text>
+  </view>
+  <view class="word-box" wx:if="{{!shouqi}}">
+    <text class="key-word2" wx:for="{{wordList2}}" bindtap="_quickSearch" data-word="{{item}}">{{item}}
+    </text>
+  </view>
+</view>
+
+<view class="history-box" >
+  <text class="help-title">搜索记录</text>
+
+  <view class="historyWord-box">
+    <view class="history-word {{index>0?'boxborder-top':''}}" wx:for="{{historyList}}" bindtap="_quickSearch" data-word="{{item}}">
+      <image class="icon-jilu" src='/imgs/icon/jilu.png'></image>
+      <text>{{item}}</text>
+    </view>
+  </view>
+  <view class="btn-clear" bindtap='_clearHistory' style="border:{{historyList?'':'initial'}}">{{historyList?'清除记录':'无'}}</view>
+</view>
+</block>
+
+<view class="result-box" wx:else>
+  <view class="top-tabBar">
+    <view class="tabbox" wx:for="{{tabItems}}" bindtap='_changeTab' data-index="{{index}}">
+      <text class="{{tabIndex==index?'border-bottom':''}}">{{item}}</text>
+    </view>
+  </view>
+  <template is="search-video" data="{{videolist:videoArr1,match:1}}" wx:if="{{tabIndex==0}}" />
+  <template is="community-search" data="{{articleArr:articleArr1,match:1}}" wx:if="{{tabIndex==2}}" />
+  <template is="search-products" data="{{productArr:productArr1,match:1}}" wx:if="{{tabIndex==1}}" />
+
+
+   <template is="search-video" data="{{videolist:videoArr2,match:2}}" wx:if="{{tabIndex==0}}" />
+     <template is="community-search" data="{{articleArr:articleArr2,match:2}}" wx:if="{{tabIndex==2}}" />
+       <template is="search-products" data="{{productArr:productArr2,match:2}}" wx:if="{{tabIndex==1}}" />
+</view>

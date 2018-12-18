@@ -1,0 +1,70 @@
+<template name="community">
+
+  <block wx:for="{{articleArr}}">
+    <view class="Summary_box {{item.items.length<3?item.items.length<1?'':'short':'tall'}}">
+      <view class="Summary_box_top">
+        <view class="Summary_box_top_img">
+          <image src="{{item.avatarUrl}}"></image>
+        </view>
+        <view>
+          <view class="text_author">{{item.author}}</view>
+          <view class="text_time">{{item.formatTime}}</view>
+        </view>
+      </view>
+
+      <view class="Summary_box_main" bindtap='look_article' id="{{item.id}}">
+        <view class="Summary_box_main_text clamp3">{{item.content}}</view>
+        <view class="Summary_box_main_imgbox">
+          <block wx:for="{{item.items}}" wx:for-item="imgitem" wx:for-index="imgIndex">
+            <image class='three_img' src="{{imgitem.img_url}}" lazy-load='true' mode="aspectFill" wx:if="{{item.items.length>2&&imgIndex<3}}" catchtap="_previewimg" data-imgs="{{item.items}}" data-imgindex="{{imgIndex}}"></image>
+            <image class='one_img' src="{{imgitem.img_url}}" lazy-load='true' mode="aspectFill" wx:if="{{item.items.length>0&&item.items.length<3&&imgIndex<1}}" catchtap="_previewimg" data-imgs="{{item.items}}" data-imgindex="{{imgIndex}}"></image>
+          </block>
+        </view>
+      </view>
+
+      <view class="Summary_box_bottom">
+
+        <button open-type='share' class="Summary_Forward" bindtap='_Forward' data-item='{{item}}' data-id='{{item.id}}'>
+          <image src="/imgs/icon/zhuanfa.png"></image> {{item.forward_num}}
+        </button>
+
+        <view class="Summary_Comment" style='border-right:1rpx solid grey' bindtap='look_article' id="{{item.id}}">
+          <image src="/imgs/icon/liuyan.png"></image>{{item.comment_num}}
+        </view>
+
+        <view class="Summary_Good" bindtap='_Praise' data-id='{{item.id}}' data-index='{{index}}' style="color:{{item.ispraised?'#fc5459':'#a2a2a2'}}">
+          <image src="{{item.ispraised?'/imgs/icon/yesgood.png':'/imgs/icon/good.png'}}"></image> {{item.praise_num}}
+        </view>
+
+      </view>
+    </view>
+  </block>
+
+
+</template>
+
+
+<template name="community-search">
+<view  wx:if="{{articleArr&&articleArr.length}}">
+<view wx:if="{{match==2&&articleArr&&articleArr.length}}" style="margin-left:30rpx;">相关推荐</view>
+  
+ 
+    
+      <navigator url='../article/article?article_id={{item.id}}'  wx:for="{{articleArr}}" class="community-search-section"  id="{{item.id}}" style="margin-top:{{index?'':66}}rpx">
+      <image src="{{item.items[0].img_url}}" class="community-search-poster" mode='aspectFill'></image>
+         <view class="community-search-content">  
+         <rich-text class="community-search-text clamp3" nodes="{{item.topic}}" />       
+         
+        <view class="community-search-author">
+        <view class='community-search-authortext'>
+         <view class="text_author">{{item.author}}</view>
+          <view class="text_time">{{item.format_time}}</view>
+        </view>
+          <image src="{{item.avatarUrl}}" class="community-search-avatar" ></image>        
+        </view>  
+         </view>
+            
+      </navigator>
+  </view>
+   <view wx:else class="search-none">{{match==1?"没搜到该关键词":''}}</view>
+</template>

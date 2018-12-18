@@ -1,0 +1,110 @@
+<!--pages/article/article.wxml-->
+
+<!-- 声音遮罩层 -->
+<view class="page-modal" style="top:{{(windowHeight-48)*4/9}}px;left:{{(windowWidth-100)/2}}px;" wx:if="{{playing}}">
+  <view class="section-modal">
+    <image src="{{soundImg}}" class="sound-animation"></image>
+    {{soundTips}}
+  </view>
+</view>
+
+<view class="btn-gohome" bindtap='gohome'>
+  <image src="/imgs/toolbar/gohome.png" class="img-gohome"></image>
+  {{'回首页'}}
+</view>
+
+<view style="display:none">
+  <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.imgUrl}}" data-index="{{index}}" bindload="imageLoad"></image>
+</view>
+<view class="container_article">
+  <view wx:if="{{article.type[0].type_name&&current==0}}" class="section-type">
+    <text wx:for="{{article.type}}">{{'#'+item.type_name+' '}}</text>
+  </view>
+  <view wx:if="{{article.video_url}}">
+    <video src="{{article.video_url}}" poster="{{article.poster}}" controls="true" objectFit="contain" />
+  </view>
+
+
+  <swiper wx:else class="swiper" indicator-dots="{{topImage.length>1?indicatorDots:false}}" vertical="{{vertical}}" autoplay="{{autoplay}}" duration="{{duration}}" bindchange="bindchange" circular="{{circular}}" style="height:{{topImage[current].imgheights}}rpx;">
+    <block wx:for="{{topImage}}" data-index='{{index}}' display-multiple-items='{{current}}'>
+      <swiper-item>
+        <image src="{{item.imgUrl}}" class="slide-image" id="{{item.id}}" data-imgs='{{topImage}}' bindtap='_previewimg' mode='{{topImage[current].mode}}' style="height:{{item.imgheights}}rpx;width:{{imgwidth}}rpx;" />
+      </swiper-item>
+
+    </block>
+
+  </swiper>
+
+
+
+  <view class="article_head">
+    <image src="{{article.avatarUrl}}" bindtap='_personPage' data-personid="{{article.user_id}}" class="author-avatar"></image>
+    <view class="article_author">
+      <text>{{article.author}}<text class="iconfont icon-publish-location" wx:if="{{article.locationName}}" style='  color: #4e83b9;font-size:20rpx'>{{article.locationName}}</text></text>
+      <text class="article_time">{{article.formatTime}}</text>
+    </view>
+    <view class="recorder-player" wx:if="{{article.recorder[0]}}" bindtap='_PlayRecorder' data-url="{{article.recorder[0].recorder_url}}">
+      <image src="/imgs/icon/tip.gif" class="img-tip" style='width:60rpx;'></image>
+      <image src="/imgs/icon/recorder-over.png"></image>
+    </view>
+
+  </view>
+  <view class="article_topic">{{article.topic}}</view>
+  <text class="article_main" bindtap='_replyAuthor'>{{article.content}}</text>
+</view>
+
+<view class="background_bar">精彩评论</view>
+
+<view class="container_comment">
+
+  <block wx:for="{{commentlist}}">
+    <view class="{{item.pid==0?'':'grey_bg'}} comment_box">
+      <view class="comment_head">
+
+        <image class="comment_head_left {{item.pid==0?'':'RR-avatar'}}" src='{{item.avatarUrl}}'></image>
+
+        <view class="comment_head_right">
+          <view class="comment_head_top {{item.pid==0?'':'RR-author'}}">{{item.author}} {{item.pid!=0?' 回复：'+item.pname:''}}</view>
+          <view class="comment_head_bottom">{{item.create_time}}</view>
+        </view>
+      </view>
+      <view class="comment_body {{item.pid==0?'':'RR-content'}} " style="border:{{commentlist[index+1].pid?'':'none'}}">
+        <view class="comment_text ">{{item.content}}</view>
+        <view class="bt-reply">
+          <form bindsubmit="submit" report-submit='true'>
+            <button form-type="submit" bindtap='_reply' class="btn-reply" data-pid='{{item.id}}' data-puid='{{item.uid}}' data-pformId='{{item.formId}}' data-author='{{item.author}}' data-article_id='{{item.article_id}}'>
+              <image src="/imgs/icon/reply.png"></image>
+            </button>
+          </form>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+
+<view class="background_bar" style='margin-top:10rpx;'>相关推荐</view>
+
+<view class="container_recommend">
+<view class="box-recommend">
+<image src="{{}}" class="img-recommend"></image>
+<text>{{}}</text>
+</view>
+</view>
+
+
+
+
+<view class="bottom-bg"></view>
+<view class="input_box">
+
+  <input placeholder="{{ReplyTo}}" bindinput="_cinremember" value="{{user_cin}}" confirm-type="send" bindconfirm="_sendcomment"></input>
+
+
+  <button open-type='share' class="bt-forward" catchtap='_Forward' data-item='{{article}}' data-id='{{article.id}}'>
+    <image src="/imgs/icon/zhuanfa.png"></image> {{article.forward_num}}
+  </button>
+
+  <text class="iconfont {{article.ispraised?'icon-xihuaned':'icon-xihuan'}}" space='nbsp' catchtap='_Praise' data-id='{{article.id}}'> {{article.praise_num}}</text>
+
+</view>

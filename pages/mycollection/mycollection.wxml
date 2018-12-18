@@ -1,0 +1,23 @@
+<!--pages/mycollection/mycollection.wxml-->
+<import src="../tpls/products/products-tpl.wxml" />
+
+<view class="topTab">
+  <view class="tabOne {{tab==0?'tabIndex':''}}" data-tab='0' bindtap='_changeTab'>商品</view>
+  <view class="tabOne {{tab==0?'':'tabIndex'}}" data-tab='1' bindtap='_changeTab'>关注</view>
+</view>
+<view wx:if="{{tab==0 && !productsArr[0]}}" style='text-align:center;color:#d1d1d1;margin-top:80rpx'>-还没有收藏商品-</view>
+
+<template wx:if="{{tab==0}}" is="products" data="{{products:productsArr,mycollection}}" />
+
+
+
+<view class="section-attention" wx:else>
+  <view class="box-attention" wx:for="{{attentionlist}}" bindtap='_personPage' data-personid='{{item.attention_id}}'>
+    <image src="{{item.avatarUrl}}" class="attention-avatar"></image>
+    <view class="attention-main">
+      <text>{{item.nickname}}</text>
+      <text style='color:grey;font-size:30rpx;'>· · ·</text>
+    </view>
+  </view>
+</view>
+<view wx:if="{{!tab==0 && !attentionlist[0]}}" style='text-align:center;color:#d1d1d1;margin-top:80rpx'>-还没有关注-</view>

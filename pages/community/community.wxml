@@ -1,0 +1,27 @@
+<!--pages/community/community.wxml-->
+<import src="../tpls/community/community.wxml" />
+
+<view class="community-box">
+
+
+  <view class="community-box-top">
+    <view class="top-redo" bindtap='_redo'>
+      <image src='/imgs/icon/redo.png'></image>
+    </view>
+    <navigator url="../search/search?searchfrom=1" class="community-search" bindtap='_search'>
+      <image src="/imgs/icon/search_grey.png"></image>请输入关键字
+    </navigator>
+    <view class="top-publish" bindtap='_writetie'>
+      <image src='/imgs/icon/publish.png'></image>
+    </view>
+  </view>
+  <view class="community-features" style="background-image:url('{{community.big.imgurl}}');background-size:100% 100%;">
+    <view class="features-box">
+      <image wx:for="{{community.small}}" src="{{item.imgurl}}" wx:if="{{index>0}}" style="{{index==4||index==8?'margin:0':''}}"></image>
+    </view>
+  </view>
+
+<!-- 列表 -->
+<template is="community" data="{{articleArr}}" />
+
+</view>

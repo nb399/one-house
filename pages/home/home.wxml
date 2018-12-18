@@ -1,0 +1,67 @@
+<!--home.wxml-->
+
+<import src="../tpls/video/video.wxml" />
+
+<view class="loading_page" wx:if="{{!loading}}"></view>
+
+<view class="container">
+  <!--轮播图-->
+  <view class="index-search-box" style="display:{{optical==1?'none':''}};opacity:{{optical}};">
+
+    <view></view>
+    <view></view>
+  </view>
+
+  <image class="index-search-img" bindtap="_search" src="/imgs/icon/search.png" style="display:{{optical==1?'none':''}};"></image>
+  <image class="index-search-message" bindtap="_message" src="/imgs/icon/index-message.png" style="display:{{optical==1?'none':''}};"></image>
+
+
+  <swiper indicator-dots="true" autoplay="true" class="swiper" circular current="{{swiperIndex}}" bindchange='_swiperChange'>
+    <block wx:for="{{bannerArr}}">
+      <swiper-item class="banner-item" data-id="{{item.hcf_themeid}}" data-name="{{item.name}}" bindtap="onThemesItemTap">
+        <image mode="aspectFill" class="item-image" src="{{item.img.url}}">
+        </image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+
+  <view class="index-grey-bar"></view>
+
+  <view class="tab-section">
+    <navigator wx:for="{{tabList}}" class="tab-item" url="{{item.url}}">
+    <image src="{{item.icon}}"></image>
+      <text>{{item.name}}</text>
+    </navigator>
+  </view>
+
+  <!--Main-->
+  <view class="home-main">
+    <image class="background_img01" src="{{category.big.imgurl}}"></image>
+    <!--商品精选-->
+    <!-- <scroll-view class="home-main-class" scroll-x='true'>
+
+      <view class="home-main-class-container">
+        <view class="class-box" wx:for="{{productsArr}}"  data-id="{{item.id}}" bindtap="onProductsItemTap" >
+          <image class="top-products-img" src="{{item.main_img_url}}"></image>
+         <view  class="top-products-box">
+         <view class="top-products-name">{{item.name}}</view>
+       <image class="collection" src="{{item.usercollection[0]?'/imgs/icon/collection_yes.png':'/imgs/icon/collection.png'}}" catchtap='_Collecting' data-id="{{item.id}}" data-index="{{index}}"></image></view>
+         
+        </view>
+      </view>
+    </scroll-view> -->
+
+    <view class="index-grey-bar"></view>
+    <!--内容贴-->
+    <view class="home-main-video">
+      <view class="home-main-header">看看好房</view>
+      <template is="video" data="{{videolist}}" />
+
+    </view>
+
+
+  </view>
+
+
+</view>

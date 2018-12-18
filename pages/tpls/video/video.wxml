@@ -1,0 +1,64 @@
+<template name="video">
+
+  <view class="home-main-videobox" wx:for="{{videolist}}">
+  
+    <video bindplay="PlayVideo" id="{{index}}" src="{{item.video_url}}" poster="{{item.poster}}" controls="true" objectFit="fill" />
+    <view class="home-main-videotext">
+        <rich-text class="home-main-videotitle" nodes="{{item.title}}" />
+      <view class="home-main-videotype" bindtap='_comment' data-id='{{item.id}}'>
+        <text space='nbsp'>{{item.type}}  时长:{{item.duration}}</text>
+      </view>
+      <view class="home-main-videocontent" bindtap='_comment' data-id='{{item.id}}'>{{item.content}}</view>
+      <view class="home-main-videofeatures">
+
+        <view class="home-main-video-01">
+          <image src="/imgs/icon/eye.png"></image>
+          <view class="num">{{item.read_num}}</view>
+        </view>
+        <view class="home-main-video-01" bindtap='_praise' data-index='{{index}}' data-id='{{item.id}}'>
+          <image src="{{item.ispraised?'/imgs/icon/yesgood.png':'/imgs/icon/good.png'}}"></image>
+          <view class="num">{{item.praise_num}}</view>
+        </view>
+        <view class="home-main-video-detail" bindtap='_comment' data-id='{{item.id}}'>详情
+        </view>
+      </view>
+
+    </view>
+
+
+  </view>
+
+
+
+</template>
+
+<template name="search-video">
+
+  <view class="search-vbox" wx:if="{{videolist.length&&videolist}}">
+  <view wx:if="{{match==2&&videolist.length&&videolist}}" style="margin-left:30rpx;">相关推荐</view>
+    <block wx:for="{{videolist}}">
+      <navigator url='../article/article?video=1&article_id={{item.id}}' class="search-vone">
+        <view class="test">   <image src="{{item.poster}}" mode='scaleToFill'></image>   </view>
+    
+        <view class="search-vtext">
+          <rich-text class="search-vtltle" nodes="{{item.title}}" />
+ 
+          <view class="search-vfeabox">
+            <view class="search-vtype">{{item.type}}</view>
+            <text class="search-vduration">时长:{{item.duration}}</text>
+
+            <view class="search-vshow">
+          <image src="/imgs/icon/eye.png"></image>
+          <view class="num">{{item.read_num}}</view>
+        </view>
+        <view class="search-vshow">
+          <image src="/imgs/icon/good.png"></image>
+          <view class="num">{{item.praise_num}}</view>
+        </view>
+          </view> 
+        </view>
+     </navigator>
+    </block>
+  </view>
+   <view wx:else class="search-none">{{match==1?"没搜到该关键词":''}}</view>
+</template>

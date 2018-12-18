@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "楼盘详情",
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTextStyle": "white",
+    "usingComponents": {
+      "cy-imgs-box": "../../component/images-box/images-box",
+      "wux-gallery": "../../dist/gallery/index"
+    }
+}

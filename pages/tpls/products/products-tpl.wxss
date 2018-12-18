@@ -1,0 +1,164 @@
+
+.highlight{
+color:#ec463d;
+}
+.products-box{
+  margin:0 15rpx 15rpx 15rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+  padding-bottom: 15rpx;
+}
+.products-item{
+   /* font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;  */
+ /* font-family: fantasy;  */
+
+  min-height:492rpx;
+  width: 354rpx;
+  border-radius: 10rpx;
+  margin-right: 0;
+  margin-top: 15rpx;
+  position: relative;
+  background-color: #FFFFFF;
+  text-align: center;
+  box-shadow: 0 0 15rpx 0.6rpx rgba(0,0,0,0.16);
+}
+.collection{
+  position: absolute;
+  width: 36rpx;
+  height: 33rpx;
+  top:20rpx;
+  right: 20rpx;
+}
+.products-image{
+  
+  width:100%;
+  height:392rpx;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+
+.products-item-bottom{
+   
+  text-align: center;
+  margin-bottom:20rpx;
+  color: #333;
+  font-weight: 200;
+}
+.products-item-bottom .name{
+   font-family:sans-serif; 
+    font-weight: 600;
+font-size:21.13rpx;
+color:#fc5459;
+text-align:left;
+text-indent: 20rpx;
+height: 50rpx;
+line-height: 50rpx;
+}
+.current_price{
+  width: 118rpx;
+font-size:21.73rpx;
+}
+.products-item-bottom .price{
+  font-size:26rpx;
+color:#000000;
+text-align:left;
+margin-left:20rpx;
+height: 36rpx;
+line-height: 36rpx;
+  display: flex;
+  flex-direction: row;
+}
+.original_price{
+  margin-left: 11rpx;
+  font-size:16.9rpx;
+  color: grey;
+  text-decoration:grey;
+  text-decoration-line:line-through;
+ 
+  width: 100rpx;
+}
+.stock{
+  margin-left: 8rpx;
+  width: 80rpx;
+  height: 36rpx;
+  background: #AFAFAF;
+  border-radius: 5rpx;
+  line-height: 36rpx;
+  text-align: center;
+  color: #ffffff;
+  font-size: 22.05rpx;
+
+}
+
+
+
+.search-container{
+  width: 690rpx;
+  margin:66rpx auto 0 auto;
+}
+.search-pbox{
+  width: 690rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 0 6rpx 20rpx 5rpx rgba(0,0,0,0.1); 
+  margin-bottom: 28rpx;
+  border-radius: 6rpx;
+}
+.search-pimg{
+width: 218rpx;
+  height: 180rpx;
+  border-radius: 4rpx;
+}
+.search-pimg image{
+  width: 218rpx;
+  height: 180rpx;
+}
+.search-pname{
+  font-size: 22rpx;
+margin-left:24rpx; 
+width:120rpx;
+height: 100rpx;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+}
+.search-pprice{
+  font-size: 14rpx;
+  height: 40rpx;
+  width: 100rpx;
+  margin-left: 112rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:flex-start;
+}
+.search-pcurrent{
+   
+
+}
+.search-original{
+  color: grey;
+  text-decoration:grey;
+  text-decoration-line:line-through;
+}
+.search-pstock{
+  width: 84rpx;
+  height: 84rpx;
+  border-radius: 50rpx;
+  background: #ec463d;
+  font-size: 22rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+.search-none{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  color: #a2a2a2;
+  margin-top:50rpx;
+}
