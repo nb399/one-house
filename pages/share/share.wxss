@@ -1,0 +1,45 @@
+.drift {
+  z-index: 12;
+  position: fixed;
+  left: 50%;
+  right: 50%;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.theItem {
+  line-height: 20px;
+  z-index: 12;
+  opacity: 0.7;
+  padding: 8px;
+  font-size: 18px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 8rpx 8rpx 20rpx rgba(0, 0, 0, 0.27);
+  width: 100px;
+  position: absolute;
+  bottom: 0;
+}
+
+.theItem .icon {
+  width: 50px;
+  height: 50px;
+}
+
+.right {
+  width: 118px;
+  right: 10px;
+  background-color: #008000;
+  border: 1px solid #f2f2f2;
+  color: #fff;
+}
+
+.left {
+  width: 118px;
+  background-color: #f00;
+  border: 1px solid #f2f2f2;
+  color: #fff;
+  left: 10px;
+}

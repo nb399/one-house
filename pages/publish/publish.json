@@ -1,1 +1,6 @@
-{}
+{
+  "navigationBarTitleText": "",
+   "usingComponents": {
+    "wux-search-bar": "../../dist/search-bar/index"
+  }
+}

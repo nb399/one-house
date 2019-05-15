@@ -39,32 +39,27 @@
       </view>
     </view>
   </block>
-
-
 </template>
 
 
 <template name="community-search">
-<view  wx:if="{{articleArr&&articleArr.length}}">
-<view wx:if="{{match==2&&articleArr&&articleArr.length}}" style="margin-left:30rpx;">相关推荐</view>
-  
- 
-    
-      <navigator url='../article/article?article_id={{item.id}}'  wx:for="{{articleArr}}" class="community-search-section"  id="{{item.id}}" style="margin-top:{{index?'':66}}rpx">
-      <image src="{{item.items[0].img_url}}" class="community-search-poster" mode='aspectFill'></image>
-         <view class="community-search-content">  
-         <rich-text class="community-search-text clamp3" nodes="{{item.topic}}" />       
-         
+  <view wx:if="{{articleArr.length>0}}">
+    <view wx:if="{{match==2&&articleArr&&articleArr.length}}" style="margin-left:30rpx;">相关推荐</view>
+    <navigator url='../article/article?article_id={{item.id}}' wx:for="{{articleArr}}" class="community-search-section" id="{{item.id}}" style="margin-top:{{index?'':66}}rpx">
+      <image src="{{item.mainImgUrl+'?x-oss-process=style/jianjin100'}}" class="community-search-poster" mode='aspectFill' wx:if="{{!item.isVideo}}"></image>
+      <video wx:if="{{item.isVideo}}" src="{{item.mainImgUrl}}" class="community-search-poster" object-fit='contain'  muted show-mute-btn></video>
+      <view class="community-search-content">
+        <rich-text class="community-search-text clamp3" nodes="{{item.content}}" />
         <view class="community-search-author">
-        <view class='community-search-authortext'>
-         <view class="text_author">{{item.author}}</view>
-          <view class="text_time">{{item.format_time}}</view>
+          <view class='community-search-authortext'>
+            <view class="text_author">{{item.author}}</view>
+            <view class="text_time">{{item.format_time}}</view>
+          </view>
+          <image src="{{item.avatarUrl}}" class="community-search-avatar"></image>
         </view>
-          <image src="{{item.avatarUrl}}" class="community-search-avatar" ></image>        
-        </view>  
-         </view>
-            
-      </navigator>
+      </view>
+
+    </navigator>
   </view>
-   <view wx:else class="search-none">{{match==1?"没搜到该关键词":''}}</view>
+  <view wx:elif="{{!has_more}}" class="search-none">{{match==1?"没搜到该关键词":''}}</view>
 </template>

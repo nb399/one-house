@@ -37,7 +37,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   font-size: 24rpx;
-  height: 330rpx;
+  height: 200rpx;
   align-content: space-around;
   font-weight: bold;
 }
@@ -95,7 +95,7 @@
 }
 
 .swiper {
-  height: 584rpx;
+  height:400rpx;
   width: 100%;
   position: relative;
 }

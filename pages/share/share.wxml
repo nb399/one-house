@@ -1,0 +1,10 @@
+<view>
+  <canvas wx:if="{{filePath==null||filePath==''}}" canvas-id="myCanvas" class="canvas" style="width:{{postBjWidth}}px; height:{{postBjHeight}}px;position:absolute;left:0;top:0;" />
+  <image bindtap='goActDetail' wx:if="{{filePath!=null&&filePath!=''}}" style='width:100%' mode='widthFix' src="{{filePath}}"></image>
+  <view class="drift" style='z-index:99' wx:if="{{loadDone}}">
+    <button class="theItem right" bindtap='share' open-type="share">分享好友
+    </button>
+    <button class="theItem left" bindtap='savePoster'>保存海报
+    </button>
+  </view>
+</view>

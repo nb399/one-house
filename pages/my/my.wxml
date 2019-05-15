@@ -1,11 +1,13 @@
-
 <view class="container my-container">
   <view class="my-header">
-    <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../imgs/about/logo.gif'}}"></image>
-    <text class="name">{{userInfo.nickName}}</text>
+    <image src="/imgs/icon/my_bg.gif" class="my-hearder-bg"></image>
+    <view class="my-header-user">
+      <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'../../imgs/about/logo.gif'}}"></image>
+      <text class="name">{{userInfo.nickName}}</text>
+    </view>
   </view>
   <!--地址管理-->
-  <view class="my-address">
+  <!-- <view class="my-address">
     <block wx:if="{{addressInfo}}">
       <view class="item-title" bindtap="editAddress">
         地址管理
@@ -14,7 +16,6 @@
       <view  class="item-main">
           <view class="section" >
             <input disabled name="name" placeholder="姓名" value="{{addressInfo.name+'  '+addressInfo.mobile}}" />
-            <!-- <input disabled type="number" name="mobile" placeholder="手机号码" value="{{addressInfo.mobile}}" style='width:56%'/> -->
           </view>
 
           <view class="section">
@@ -25,21 +26,37 @@
     <block wx:else>
       <view class="add-new-address" bindtap="editAddress"><text class="icon">+</text><text>添加地址</text></view>
     </block>
-  </view>
+  </view> -->
   <view class="own-box">
-   <navigator class="my-order" url='../myarticle/myarticle'>
-    <view class="item-title">我的发帖
-     <image src="../../imgs/icon/arrow@right.png"></image></view>
-  </navigator>
-  <navigator class="my-order" url='../mycollection/mycollection'>
-    <view class="item-title">我的收藏
-     <image src="../../imgs/icon/arrow@right.png"></image></view>
-  </navigator>
-  <navigator class="my-order" url="../myorder/myorder">
+    <navigator class="my-order" url='../myarticle/myarticle'>
+      <view class="item-title">
+        <view class="title-text">我的原创</view>
+        <image src="../../imgs/icon/arrow@right.png"></image>
+      </view>
+    </navigator>
+    <navigator class="my-order" url='../mycollection/mycollection'>
+      <view class="item-title">
+        <view class="title-text">收藏和关注</view>
+        <image src="../../imgs/icon/arrow@right.png"></image>
+      </view>
+    </navigator>
+    <button class="my-order" open-type='contact' hover-class='none'>
+      <view class="item-title">
+        <view class="title-text">问题与举报</view>
+        <image src="../../imgs/icon/arrow@right.png"></image>
+      </view>
+    </button>
+    <view class="my-order" bindtap='_phoneCall'>
+        <view class="item-title">
+        <view class="title-text">联系官方</view>
+        <image src="../../imgs/icon/arrow@right.png"></image>
+      </view>
+    </view>
+    <!-- <navigator class="my-order" url="../myorder/myorder">
     <view class="item-title">我的订单
      <image src="../../imgs/icon/arrow@right.png"></image></view>
-  </navigator>
+  </navigator> -->
   </view>
 
-  
+
 </view>

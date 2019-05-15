@@ -48,7 +48,7 @@ Page({
   onProductsItemTap: function (event) {
     var id = home.getDataSet(event, 'id');  
     wx.navigateTo({
-      url: '../product/product?id=' + id
+      url: '../one-building/one-building?type=company&company_id=' + id
     });
   },
   /**

@@ -8,67 +8,112 @@
   </view>
 </view>
 
+<!-- 选择楼盘 -->
+<view class="page-build-search" wx:if="{{searchBuild}}">
+  <wux-search-bar clear show-cancel value="{{ value }}" controlled placeholder="Search" bind:change="onSearchChange" bind:focus="onSearchFocus" bind:blur="onSearchBlur" bind:confirm="onSearchConfirm" bind:clear="onSearchClear" bind:cancel="onSearchCancel"
+  />
 
-<view class="page-bookmark" wx:if="{{chooseMark}}">
-  <view class="markTitle">
-    <text space='ensp'>选择你的标签\n发布理想生活的线索</text>
+  <view wx:if="{{!searchRes.length>0}}">
+    <view class="hot-search-title">热门搜索</view>
+    <view class="hot-search-box">
+      <text wx:for="{{wordList}}" class="hot-search-item" bindtap='_chooseKeyWord' data-word="{{item.word}}">{{item.word}}</text>
+    </view>
   </view>
-  <view class="mark-section">
-    <text wx:for="{{category}}" class="markBox {{item.choosed?'marked':''}}" bindtap='_chooseMark' data-index="{{index}}" wx:if="{{index>1}}">{{'#'+item.name}}</text>
+  <view wx:else>
+    <view class="search-res-box">
+      <view wx:for="{{searchRes}}" class="search-res-item" bindtap='chooseBuild' data-build="{{item}}">{{item.name}}</view>
+    </view>
+
   </view>
-  <view class="btn-nextStep" bindtap='_nextStep'>下一步</view>
 
 </view>
-<view class="publish-page" wx:else>
-  <view class="AA-greyline"></view>
-  <view class="topic_box">
-    <input class="topic_cin" placeholder="添加标题" bindinput='_cintopicremember' value="{{user_cintopic}}" maxlength='25'></input>
+<!-- 选择话题 -->
+<view class="page-bookmark" wx:elif="{{chooseMark}}">
+  <view class="markTitle">
+    <text space='ensp'>选择你的话题\n让大家更容易发现你</text>
   </view>
+  <view class="mark-section">
+    <text wx:for="{{category}}" class="markBox {{item.choosed?'marked':''}}" bindtap='_chooseMark' data-index="{{index}}" wx:if="{{index>1&&item.id!=4}}">{{'#'+item.name}}{{(item.id==3&&publish.relateBuildName)?'-'+publish.relateBuildName:''}}</text>
+  </view>
+  <view class="btn-nextStep" bindtap='_nextStep'>完成</view>
 
+</view>
+<view class="publish-page" wx:elif="{{showPublish}}">
+  <!-- <view class="AA-greyline"></view>
+   <view class="topic_box">
+    <input class="topic_cin" placeholder="添加标题" bindinput='_cintopicremember' value="{{user_cintopic}}" maxlength='25'></input>
+  </view> -->
+  <view class="top-btn-box">
+    <view bindtap='_canclePublish' class="btn-top-cancle">取消</view>
+    <view bindtap='_publishmy' class="btn-top-publish">发表</view>
 
+  </view>
+  <view class="topic-box" bindtap='goChooseMark'>
+    <image src="{{typeName.length>0?'/imgs/icon/icon-topic-blue.png':'/imgs/icon/icon-topic-eee.png'}}" class="topic-box-icon"></image>
+    <view class="topic-box-main {{typeName.length>0?'color-blue':''}}">
+      <block wx:if="{{typeName.length>0}}">
+        <block wx:for="{{typeName}}">{{(index>0?'、':'')+item}}</block>
+      </block>
+      <block wx:if="{{!typeName.length>0}}">
+        <text>参与话题</text>
+      </block>
+    </view>
+    <view class="topic-box-tips" wx:if="{{!typeName.length>0}}">合适的话题会让更多的人看到~</view>
+    <image src="/imgs/icon/icon-right.png" class="topic-box-right-icon"></image>
+  </view>
+  <view class="imgs_box" wx:if="{{publishVideo}}">
+    <view class="video_box_item">
+      <video src="{{tempFilePaths[0].url}}" class="video_box_item_video"></video>
+    </view>
+  </view>
+  <view class="imgs_box" wx:else>
+    <!-- 图片 -->
+    <view class="imgs_box_item" style="margin-right:{{index==4||index==9?0:'1%'}}" wx:for="{{tempFilePaths}}">
+      <image src="{{item.url}}" bindtap='_previewimg' data-url="{{item.url}}" mode='aspectFill' class="imgs_box_item_image"></image>
+    </view>
+    <view class="imgs_box_item" style="margin-right:{{tempFilePaths.length==4||tempFilePaths.length==9?0:'1%'}}">
+      <image src="/imgs/icon/choose_img.png" bindtap='_chooseimg' class="imgs_box_item_image"></image>
+    </view>
+  </view>
+  <!-- 发布内容 -->
   <view class="publish_box">
+    <textarea class="publish_cin" bindinput='_cinremember' value="{{user_cin}}" placeholder="这一刻,想说的什么..." maxlength='5000'></textarea>
 
-    <textarea class="publish_cin" bindinput='_cinremember' value="{{user_cin}}" placeholder="聊聊好生活是怎么玩出来的吧~" maxlength='5000'></textarea>
-<view class="location-box">
-  <view class="btn-location" bindtap='chooseLocation'><text class="iconfont icon-publish-location"></text>{{locationName?locationName:'你在哪里？'}}
-    <view class="btn-reset" wx:if="{{locationName}}" catchtap='resetLocation'>x</view>
-    </view></view>
-  
+
+    <view class="location-box">
+      <view class="btn-location" bindtap='chooseLocation'>
+        <text class="iconfont icon-publish-location"></text>{{locationName?locationName:'你在哪里？'}}
+        <view class="btn-reset" wx:if="{{locationName}}" catchtap='resetLocation'>x</view>
+      </view>
+    </view>
+
     <!-- 录音  -->
-
-    <view class="section-recorder">
+    <block wx:if="{{!publishVideo}}">
+    <view class="section-recorder" >
       <audio src="{{src}}" id="myAudio"></audio>
       <view class="recorder-tips">
-        <view style="font-size:30rpx;line-height:70rpx;border-bottom:1rpx solid #d1d1d1;">按下开始录音</view>
-        <view style="font-size:24rpx;color:#d1d1d1;line-height:50rpx">共可录制10秒钟</view>
+        <view style="font-size:30rpx;line-height:70rpx;border-bottom:1rpx solid #d1d1d1;">按下添加语音</view>
+        <view style="font-size:24rpx;color:#d1d1d1;line-height:50rpx">你有10秒去表达</view>
       </view>
       <text class="iconfont icon-start" bindtap="_Recorder" wx:if="{{recording==0}}"></text>
       <text class="iconfont icon-stop" bindtap="_StopRecorder" wx:if="{{recording==1}}"></text>
       <image class="recorder-redo" src="/imgs/icon/redo.png" bindtap="_ReRecorder" wx:if="{{recording==2}}"></image>
       <image src="/imgs/icon/player.png" class="recorder-player" bindtap="_PlayRecorder" wx:if="{{recording==2}}"></image>
-
     </view>
 
-    <view class="section-progress">
-      <image src="/imgs/icon/progress.png" style="width:650rpx;height:20rpx;"></image>
-      <view class="recorder-progress {{recording!=0?'running':''}}" style="animation-play-state:{{recording==2?'paused':''}}">{{recorderDuration?recorderDuration+'s':''}}</view>
-    </view>
-
-
-    <view class="imgs_box">
-      <image src="{{item}}" wx:for="{{tempFilePaths}}" bindtap='_previewimg' data-url="{{item}}" mode='aspectFill' style="margin-right:{{index==4||index==9?0:'20rpx'}}"></image>
-      <image src="/imgs/icon/choose_img.png" bindtap='_chooseimg' style="margin-right:{{tempFilePaths.length==4||tempFilePaths.length==9?0:'20rpx'}}"></image>
-    </view>
-
+      <view class="section-progress">
+        <image src="/imgs/icon/progress.png" style="width:650rpx;height:20rpx;"></image>
+        <view class="recorder-progress {{recording!=0?'running':''}}" style="animation-play-state:{{recording==2?'paused':''}}">{{recorderDuration?recorderDuration+'s':''}}</view>
+      </view>
+</block>
   </view>
 
-  <button bindtap='_publishmy' type="warn">发布</button>
-
-  <!-- <view style="height:50rpx;width:100%;margin:50rpx 0">
+  <!-- <button bindtap='_publishmy' type="warn" class="btn-publish">发 布</button> -->
+</view>
+<!-- <view style="height:50rpx;width:100%;margin:50rpx 0">
 <view style="height:50rpx;background:green;width:{{progress}}%"></view>
 </view> -->
-
-  <!-- <view class="wrap">
+<!-- <view class="wrap">
   <view class="circle-box">
     <canvas class="circle" style="z-index: -99; width:200rpx; height:200rpx;" canvas-id="canvasCircle">
     </canvas>
@@ -77,4 +122,23 @@
     <view class="draw_btn" bindtouchstart="drawCircle" bindtouchend="stopCircle">录音</view>
   </view>
 </view>  -->
+<!-- 提示发布 -->
+<view wx:else>
+  <view class="publish-tips">
+    <view class="publish-tips-title">讲楼市 说维权 分享实地跑盘</view>
+    <view class="publish-tips-note">真正的看房社区，等你一起来</view>
+  </view>
+  <view class="camear-contianer">
+    <view class="box-video" bindtap='goPublishVideo'>
+      <image src="/imgs/icon/video.png" class="btn-camera"></image>
+    </view>
+    <view class="camera-btn-text" bindtap='goPublishVideo'>视频</view>
+  </view>
+  <view class="camear-contianer">
+    <view class="box-camera" bindtap='goPublish'>
+      <image src="/imgs/icon/jiangji-2.png" class="btn-camera"></image>
+    </view>
+    <view class="camera-btn-text" bindtap='goPublish'>发布精彩照片</view>
+    <image src="/imgs/icon/cha@2x.png" class="btn-close-page" bindtap='closePage'></image>
+  </view>
 </view>

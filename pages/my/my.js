@@ -1,7 +1,10 @@
+import {
+  Address
+} from '../../utils/address.js';
 
-import { Address } from '../../utils/address.js';
-
-import { My } from '../my/my-model.js';
+import {
+  My
+} from '../my/my-model.js';
 
 var address = new Address();
 
@@ -13,24 +16,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this._loadData();
-    this._getAddressInfo();
+    //this._getAddressInfo();
   },
 
-  onShow:function(){
-    
+  onShow: function() {
+
   },
 
+  /**
+   * 拨打热线
+   */
+  _phoneCall() {
+    wx.makePhoneCall({
+      phoneNumber: '15669961669',
+    })
+  },
 
-
-  _getAddressInfo: function () {
+  _getAddressInfo: function() {
 
     address.getAddress((addressInfo) => {
       this._bindAddressInfo(addressInfo);
@@ -39,13 +49,13 @@ Page({
   },
 
   /*绑定地址信息*/
-  _bindAddressInfo: function (addressInfo) {
+  _bindAddressInfo: function(addressInfo) {
     this.setData({
       addressInfo: addressInfo
     });
   },
 
-  _loadData: function () {
+  _loadData: function() {
 
     my.getUserInfo((data) => {
       this.setData({
@@ -53,33 +63,33 @@ Page({
       });
     });
 
-  
+
   },
 
-  
+
   /*
- * 提示窗口
- * params:
- * title - {string}标题
- * content - {string}内容
- * flag - {bool}是否跳转到 "我的页面"
- */
-  showTips: function (title, content) {
+   * 提示窗口
+   * params:
+   * title - {string}标题
+   * content - {string}内容
+   * flag - {bool}是否跳转到 "我的页面"
+   */
+  showTips: function(title, content) {
     wx.showModal({
       title: title,
       content: content,
       showCancel: false,
-      success: function (res) {
+      success: function(res) {
 
       }
     });
   },
 
-  editAddress: function (event) {
+  editAddress: function(event) {
     console.log(event)
     var that = this;
     wx.chooseAddress({
-      success: function (res) {
+      success: function(res) {
         console.log(res);
         var addressInfo = {
           name: res.userName,
@@ -96,7 +106,7 @@ Page({
           }
         });
       },
-      fail:function(res){
+      fail: function(res) {
         console.log(res)
       }
     })

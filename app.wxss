@@ -1,9 +1,9 @@
 
 
-@import 'assets/styles/weui.wxss';
-@import 'assets/styles/skyvow.wxss';
+/* @import 'assets/styles/weui.wxss';
+@import 'assets/styles/skyvow.wxss'; */
 page{
-
+font-family: PingFang-SC-light,PingFang-SC-Regular,"Microsoft Yahei";
 background-color:#ffffff;
 
 }
@@ -13,9 +13,7 @@ background-color:#ffffff;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  background-color: #fff;
-  font-family: "Microsoft Yahei";
-  
+  background-color: #fff;  
 }
 /* cy.css  start */
 .grey-bar{

@@ -153,6 +153,8 @@ video {
   margin: 30rpx 30rpx;
   font-size: 30rpx;
   line-height: 50rpx;
+  width: auto;
+  height: auto
 }
 
 
@@ -160,7 +162,12 @@ video {
 .container_comment {
   height: auto;
 }
-
+.no-content{
+  text-align: center;
+  font-size: 22rpx;
+  color: #a2a2a2;
+  padding: 50rpx;
+}
 .comment_box {
   display: flex;
   flex-direction: column;
@@ -253,15 +260,20 @@ video {
   color: gray;
 }
 .box-recommend{
-  height: 150rpx;
+  padding: 30rpx;
   display: flex;
   align-items: center;
 }
 .img-recommend{
-  width: 80rpx;
-  height: 80rpx;
+  width: 120rpx;
+  height: 120rpx;
 }
-
+.recommend-text{
+  padding: 0 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .input_box {
   font-size: 24rpx;

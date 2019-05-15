@@ -1,18 +1,18 @@
-<image src="/imgs/about/tips.png" style="width:100%;height:{{windowHeight}}px;z-index:999999;position:fixed;top:0;left:0;opacity:0.85" bindtouchstart='_clickTips' wx:if="{{!haveTips}}">
+<image src="https://nb399.oss-cn-hangzhou.aliyuncs.com/fang/tips.png" style="width:100%;height:{{windowHeight}}px;z-index:999999;position:fixed;top:0;left:0;opacity:0.85" bindtouchstart='_clickTips' wx:if="{{!haveTips}}">
 </image>
 
 
-<view class="section-top" >
+<view class="section-top">
   <view class="feature-box" wx:if="{{!Dev}}">
-    <view class="btn-toptow" wx:for="{{topTow}}" bindtap='_changeTopTow' data-topTowIndex='{{item}}'>{{item}}
+    <!-- <view class="btn-toptow" wx:for="{{topTow}}" bindtap='_changeTopTow' data-topTowIndex='{{item}}'>{{item}}
  
-    </view>
-    <view class="{{topTowIndex==topTow[0]?'bottom-line-left':'bottom-line-right'}}"></view>
+    </view> -->
+    <!-- <view class="{{topTowIndex==topTow[0]?'bottom-line-left':'bottom-line-right'}}"></view> -->
     <navigator url="../search/search?searchfrom=2" class="search-box">
-      <image src="../../imgs/icon/search_grey.png"></image>搜索笔记，商品和用户
+      <image src="../../imgs/icon/search_grey.png"></image>搜索楼盘，帖子和实地跑盘
     </navigator>
 
-    <text class="iconfont icon-camera" bindtap='_writetie' ></text>
+    <text class="iconfont icon-camera" bindtap='_writetie'></text>
 
 
   </view>
@@ -60,21 +60,21 @@
     </view>
     <view class="img_item">
       <view wx:for="{{col1}}" wx:key="id">
-        <view class="article-box" style="margin-right:2%;" bindtap='_look_article' data-id='{{item.id}}'>
-          <image src="{{item.items[0].img_url}}" style="width:100%;height:{{item.height}}px;border-radius:6rpx;"></image>
+        <view class="article-box" style="margin-right:2%;">
+          <video id="{{item.id}}" src="{{item.mainImgUrl}}" style="width:100%;height:{{item.height}}px;background:#f5f5f5;" wx:if="{{item.isVideo}}" enable-progress-gesture='{{false}}' bindplay="_playVideo"  muted show-mute-btn initial-time="0.01"></video>
+          <image src="{{item.mainImgUrl+'?x-oss-process=style/jianjin100'}}" style="width:100%;height:{{item.height}}px;background:#f5f5f5;" wx:else  bindtap='_look_article' data-id='{{item.id}}'></image>
           <view class="content">
-            <view class="title">
-              <view class="content-topic">{{item.content}}</view>
-
-              <view style='width:14%;height:100%;' catchtap='_PlayRecorder' data-url="{{item.recorder[0].recorder_url}}" wx:if="{{item.recorder[0]}}">
+            <view class="title"  >
+              <view class="content-topic" bindtap='_look_article' data-id='{{item.id}}'>{{item.relateBuildId?'#'+item.relateBuildName+' ':''}}{{item.content}}</view>
+              <view style='width:14%;height:100%;' catchtap='_PlayRecorder' data-url="{{item.recorderUrl}}" wx:if="{{item.recorderUrl}}">
                 <image src="../../imgs/icon/recorder-over.png" class="btn-recorder"></image>
-                   <image src="/imgs/icon/tip.gif" class="img-tip" style="width:50rpx;height:40rpx;transform:rotate(-90deg);"></image>
+                <image src="/imgs/icon/tip.gif" class="img-tip" style="width:50rpx;height:40rpx;transform:rotate(-90deg);"></image>
               </view>
 
             </view>
             <view class="content-bottom">
               <view class="author">
-                <image src="{{item.avatarUrl}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
+                <image src="{{item.avatarUrl+'?x-oss-process=style/jianjin100'}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
               </view>
               <view class="praise">
                 <text class="iconfont {{item.praisepeople[0]?'icon-collected':'icon-collecte'}}" catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}' data-col='{{1}}'> {{item.praise_num}}</text>
@@ -86,23 +86,24 @@
     </view>
     <!-- 右栏 -->
     <view class="img_item">
-      <view wx:for="{{col2}}" wx:key="id">
-        <view class="article-box" style="margin-left:2%" bindtap='_look_article' data-id='{{item.id}}'>
-          <image src="{{item.items[0].img_url}}" style="width:100%;height:{{item.height}}px;border-radius:6rpx"></image>
+      <view wx:for="{{col2}}">
+        <view class="article-box" style="margin-left:2%">
+          <video id="{{item.id}}" src="{{item.mainImgUrl}}" style="width:100%;height:{{item.height}}px;background:#f5f5f5;" wx:if="{{item.isVideo}}" enable-progress-gesture='{{false}}' bindplay="_playVideo"  muted show-mute-btn initial-time="0.01"></video>
+          <image src="{{item.mainImgUrl+'?x-oss-process=style/jianjin100'}}" style="width:100%;height:{{item.height}}px;background:#f5f5f5;" wx:else  bindtap='_look_article' data-id='{{item.id}}'></image>
           <view class="content">
-            <view class="title">
+            <view class="title"  >
 
-              <view class="content-topic">{{item.content}}</view>
+              <view class="content-topic" bindtap='_look_article' data-id='{{item.id}}'>{{item.relateBuildId?'#'+item.relateBuildName+' ':''}}{{item.content}}</view>
 
-              <view style='width:14%;height:100%;' catchtap='_PlayRecorder' data-url="{{item.recorder[0].recorder_url}}" wx:if="{{item.recorder[0]}}">
+              <view style='width:14%;height:100%;' catchtap='_PlayRecorder' data-url="{{item.recorderUrl}}" wx:if="{{item.recorderUrl}}">
                 <image src="../../imgs/icon/recorder-over.png" class="btn-recorder"></image>
-                <image src="/imgs/icon/tip.gif" class="img-tip" style="width:50rpx;height:40rpx;transform:rotate(-90deg);" ></image>
+                <image src="/imgs/icon/tip.gif" class="img-tip" style="width:50rpx;height:40rpx;transform:rotate(-90deg);"></image>
               </view>
             </view>
 
             <view class="content-bottom">
               <view class="author">
-                <image src="{{item.avatarUrl}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
+                <image src="{{item.avatarUrl+'?x-oss-process=style/jianjin100'}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
               </view>
               <view class="praise">
                 <text class="iconfont {{item.praisepeople[0]?'icon-collected':'icon-collecte'}}" catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}' data-col='{{2}}'> {{item.praise_num}}</text>
@@ -118,72 +119,6 @@
   </view>
 
 </view>
-<!-- 关注内容 -->
-<view wx:else class="section-attention">
-  <block wx:for="{{attentionArticleList}}">
-    <view class="AA-greyline"></view>
-    <view class="atention-article" bindtap='_look_article' data-id='{{item.id}}'>
-      <view class="article-top">
-        <image src="{{item.avatarUrl}}" catchtap='_personPage' data-personid='{{item.user_id}}'></image>
-        <view class="AA-toptext">
-          <text class="AA-author">{{item.author}}</text>
-          <text class="AA-formatTime">{{item.formatTime}}</text>
-        </view>
-      </view>
-      <view class="article-main">
-        <text class="AA-topic">{{item.content}}</text>
-        <!-- <text class="AA-content">{{item.content}}</text> -->
-        <image src="{{item.items[0].img_url}}" mode="aspectFill"></image>
-      </view>
-      <view class="article-feature">
-        <button open-type='share' class="Summary_Forward" catchtap='_Forward' data-item='{{item}}' data-id='{{item.id}}'>
-          <image src="/imgs/icon/zhuanfa.png"></image> {{item.forward_num}}
-        </button>
-        <text class="iconfont icon-message" space='nbsp'> {{item.comment_num}}</text>
-        <text class="iconfont {{item.praisepeople[0]?'icon-aixined':'icon-aixin'}}" space='nbsp' catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}'> {{item.praise_num}}</text>
-      </view>
-    </view>
-
-    <view wx:if="{{index==0}}">
-      <view class="AA-greyline"></view>
-      <view class="recommended-background">
-        <text space='nbsp'>   你可能感兴趣的用户</text>
-        <scroll-view scroll-x='true' style='width:{{windowWidth}}px;background:#ffffff'>
-          <view class="recommended-scrollbox">
-            <view class="recommended-box" wx:for="{{recommendedList}}">
-              <image src="{{item.avatarUrl}}" catchtap='_personPage' data-personid='{{item.uid}}'></image>
-              <view class="recommended-main">
-                <text class="recommended-name">{{item.nickname}}</text>
-                <view class="recommended-bt {{item.attentioned?'recommended-had':''}}" data-id="{{item.uid}}" data-index='{{index}}' catchtap='_attention'>关注</view>
-                <!-- <view class="recommended-had" wx:else data-id="{{item.uid}}" data-index='{{index}}' catchtap='_attention'>已关注</view> -->
-              </view>
-            </view>
-          </view>
-
-        </scroll-view>
-      </view>
-    </view>
-  </block>
-  <view wx:if="{{attentionArticleList.length==0}}">
-    <view class="AA-greyline"></view>
-    <view class="recommended-background">
-      <text space='nbsp'>   你可能感兴趣的用户</text>
-      <scroll-view scroll-x='true' style='width:{{windowWidth}}px;background:#ffffff'>
-        <view class="recommended-scrollbox">
-          <view class="recommended-box" wx:for="{{recommendedList}}">
-            <image src="{{item.avatarUrl}}" catchtap='_personPage' data-personid='{{item.uid}}'></image>
-            <view class="recommended-main">
-              <text class="recommended-name">{{item.nickname}}</text>
-              <view class="recommended-bt" wx:if="{{!item.attentioned}}" data-id="{{item.uid}}" data-index='{{index}}' catchtap='_attention'>关注</view>
-              <view class="recommended-had" wx:else data-id="{{item.uid}}" data-index="{{index}}" catchtap='_attention'>已关注</view>
-            </view>
-          </view>
-        </view>
-
-      </scroll-view>
-    </view>
-  </view>
-</view>
 
 <!-- 遮罩层 -->
 <view class="page-modal" style="top:{{windowHeight*4/9}}px;left:{{(windowWidth-100)/2}}px;" wx:if="{{playing}}">
@@ -193,7 +128,7 @@
   </view>
 </view>
 
-<view style="display:none">
+<!-- <view style="display:none">
   <image wx:for="{{loadimgs}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" binderror="_TTTTT" bindload="onImageLoad" lazy-load='true'></image>
-</view>
+</view> -->
 <audio src="{{src}}" id="myAudio"></audio>

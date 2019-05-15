@@ -95,7 +95,15 @@ button::after {
   border-radius: initial;
   border-radius: initial;
 }
-
+.show-nothing{
+  display: flex;
+  justify-content: center;
+  color: #666;
+  padding-bottom: 30rpx;
+}
+.show-nothing text{
+  text-align: center;
+}
 .grey-bar {
   background-color: #f8f8f8;
   height: 30rpx;
@@ -146,7 +154,33 @@ button::after {
   height: 40rpx;
   margin-right: 4rpx;
 }
-
+/* 开盘记录 */
+.ever-list{
+  margin: 30rpx;
+}
+.ever-list-item{
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+}
+.ever-list-item-name{
+  flex: 1 0 350rpx;
+  font-size: 34rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ever-list-item-type{
+  flex: none;
+  color: #00848a;
+  font-size: 28rpx;
+  text-shadow: 0 0 10rpx 1rpx #00848a;
+}
+.ever-list-icon-right{
+  width: 42rpx;
+  height: 42rpx;
+  transform: rotateZ(-90deg)
+}
 /* 数据表格 */
 
 .table {
@@ -213,8 +247,8 @@ justify-content:space-between;
   color: #fc5459;
 }
 .announcer-title-right-icon{
-  width: 56rpx;
-  height: 56rpx;
+  width: 50rpx;
+  height: 40rpx;
 }
 
 .announcer-name {
@@ -247,8 +281,8 @@ justify-content:space-between;
   border-radius: 50%;
 }
 /* 小顾问 */
-.grey-line-60{
-  width: 60%;
+.grey-line-80{
+  width: 80%;
   margin: 0 auto;
   height: 1rpx;
   background: #c9c8c8;
@@ -371,6 +405,7 @@ font-size: 32rpx;
 .top-skin2 {
   background: #fff;
   border-bottom: 2rpx solid #d1d1d1;
+
 }
 
 .fixed-top cover-image {
@@ -863,6 +898,7 @@ font-size: 32rpx;
   align-items: center;
   height: 100%;
   margin-right: 20rpx;
+  justify-content: center;
 }
 
 .skin2 .extra-button2 {
@@ -871,8 +907,8 @@ font-size: 32rpx;
 }
 
 .extra .extra-button-haveicon cover-image {
-  width: 48rpx;
-  height: 48rpx;
+  width: 60rpx;
+  height: 60rpx;
 }
 
 /* .extra .sub-group {

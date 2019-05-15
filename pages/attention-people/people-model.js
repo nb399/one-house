@@ -4,6 +4,15 @@ class People extends Base {
   constructor() {
     super();
   }
+  getQrcode(personid, callback) {
+    var param = {
+      url: 'person/getQrcode?personid=' + personid,
+      sCallback: function (data) {
+        callback && callback(data);
+      }
+    };
+    this.request(param);
+  }
 
   getPerson(personid,callback){
     var param = {

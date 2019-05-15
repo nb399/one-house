@@ -5,6 +5,18 @@ class oneModel extends Base {
     super();
   }
   /**
+ * 收藏
+ */
+  DoCollecte(id, callback) {
+    var params = {
+      url: 'collection?company_id=' + id,
+      sCallback: function (res) {
+        callback(res);
+      }
+    }
+    this.request(params);
+  }
+  /**
    * 点赞或取消
    */
   clickLove(article_id, callback) {
@@ -20,11 +32,28 @@ class oneModel extends Base {
   /**
    * 获取跑盘
    */
-  getArticleByCompany(company_id, callback){
+  getArticleByCompany(company_id,page,callback){
     var param = {
       url: 'building/getArticleByCompany',
       data: {
-        company_id: company_id     //楼盘公司id
+        company_id: company_id,     //楼盘公司id
+        page:page
+      },
+      sCallback: function (data) {
+        console.log(data)
+        callback && callback(data);
+      }
+    };
+    this.request(param);
+  }
+  /**
+   * 获取开盘记录
+   */
+  getBuildEver(company_id, callback){
+    var param = {
+      url: 'building/getBuildEver',
+      data: {
+        company_id: company_id     //推盘id
       },
       sCallback: function (data) {
         callback && callback(data);
@@ -35,11 +64,11 @@ class oneModel extends Base {
   /**
    * 获取置业顾问
    */
-  getSalersByBuild(build_id,callback){
+  getSalersByCompany(company_id,callback){
     var param = {
-      url: 'building/getSalersByBuild',
+      url: 'building/getSalersByCompany',
       data: {
-        build_id: build_id     //推盘id
+        company_id: company_id     //推盘id
       },
       sCallback: function (data) {
         callback && callback(data);
@@ -50,7 +79,7 @@ class oneModel extends Base {
   /**
    * 获取楼盘详情
    */
-  getOneDetail(build_id, callback){
+  getOneDetail(build_id, callback) {
     var param = {
       url: 'building/getBuildDetail',
       data: {
@@ -62,5 +91,20 @@ class oneModel extends Base {
     };
     this.request(param);
   }
+  /**
+   * 获取楼盘详情
+   */
+getOneCompany(company_id,callback){
+  var param = {
+    url: 'building/getOneCompany',
+    data: {
+      company_id: company_id
+    },
+    sCallback: function (data) {
+      callback && callback(data);
+    }
+  };
+  this.request(param);
+}
 }
 export { oneModel }

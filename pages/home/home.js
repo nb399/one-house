@@ -14,29 +14,40 @@ Page({
       {
         icon:'/imgs/icon/icon-quanbu.png',
         name:'全部楼盘',
-        url:'/pages/all-building/all-building'
+        url:'/pages/all-building/all-building?build_type_id=0'
       }, {
         icon: '/imgs/icon/icon-jijiang.png',
         name: '即将拿证',
+        url: '/pages/all-building/all-building?build_type_id=2'
       }, {
         icon: '/imgs/icon/icon-gongshi.png',
         name: '正在公示',
+        url: '/pages/all-building/all-building?build_type_id=3'
       }, {
         icon: '/imgs/icon/icon-dengji.png',
         name: '正在登记',
-      }, {
-        icon: '/imgs/icon/icon-jijiangyaohao.png',
-        name: '即将摇号',
-      }, {
-        icon: '/imgs/icon/icon-jieguo.png',
-        name: '已摇号',
-      }, {
-        icon: '/imgs/icon/icon-shidi.png',
-        name: '实地盘跑',
-      }, {
-        icon: '/imgs/icon/icon-yuyue.png',
-        name: '预约看房',
-      }    ],
+        url: '/pages/all-building/all-building?build_type_id=4'
+      }
+      //, {
+      //   icon: '/imgs/icon/icon-jijiangyaohao.png',
+      //   name: '即将摇号',
+      //   url: '/pages/all-building/all-building?build_type_id=5'
+      // }, {
+      //   icon: '/imgs/icon/icon-jieguo.png',
+      //   name: '已摇号',
+      //   url: '/pages/all-building/all-building?build_type_id=6'
+      // }, {
+      //   icon: '/imgs/icon/icon-shidi.png',
+      //   name: '实地盘跑',
+      //   url: '/pages/pbl/pbl',
+      //   urlType: 2,//urlType:2=switchTab
+      // }, {
+      //   icon: '/imgs/icon/icon-yuyue.png',
+      //   name: '搜索',
+      //   url: '/pages/search/search',
+
+      // }   
+       ],
     swiperIndex: 1,
     category: '',
     indexId: ''
@@ -219,11 +230,9 @@ Page({
       });
     });
 
-    home.getProductsData((data) => {
-
+    home.getRecentBuild((data) => {
       this.setData({
-        productsArr: data,
-
+        buildArr: data.data,
       });
 
     });
@@ -241,22 +250,20 @@ Page({
     })
     home.DoCollecte(id, (res) => {
       console.log(res)
-      var productsArr = that.data.productsArr;
+      var buildArr = that.data.buildArr;
       if (res) {
 
-        productsArr[index].usercollection[0] = 1;
+        buildArr[index].usercollection[0] = 1;
         that.setData({
-          productsArr: productsArr
+          buildArr: buildArr
         })
       }
       else {
         console.log(333)
-        productsArr[index].usercollection[0] = 0;
+        buildArr[index].usercollection[0] = 0;
         that.setData({
-          productsArr: productsArr
+          buildArr: buildArr
         })
-
-
       }
       wx.hideLoading();
     })
@@ -264,21 +271,28 @@ Page({
   /**
    * 跳转至商品详情
    */
-  onProductsItemTap: function (event) {
+  clickCompany: function (event) {
     var id = home.getDataSet(event, 'id');
     wx.navigateTo({
-      url: '../product/product?id=' + id
+      url: '../one-building/one-building?type=company&company_id=' + id
     });
   },
   /**
-   * 跳转至主题页
+   * 点击轮播图
    */
-  onThemesItemTap: function (event) {
-    var id = home.getDataSet(event, 'id');
-    var name = home.getDataSet(event, 'name');
-    wx.navigateTo({
-      url: '../theme/theme?id=' + id + '&name=' + name
-    })
+  clickBannerItem(e) {
+    var that = this;
+    var type = e.currentTarget.dataset.type;
+    var id = e.currentTarget.dataset.id;
+    switch (type) {
+      case 'company': wx.navigateTo({
+        url: '/pages/one-building/one-building?type=' + type + '&company_id=' + id
+      }); break;
+      case 'build': wx.navigateTo({
+        url: '/pages/one-building/one-building?type=' + type + '&build_id=' + id
+      }); break;
+    }
+
   },
   /**
    * 播放视频

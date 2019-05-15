@@ -1,0 +1,15 @@
+<view class="top-main">
+  <view class="icon-box2">
+    <view class="icon-box__ctn2">
+      <image class='create-icon2' src='https://nb399.oss-cn-hangzhou.aliyuncs.com/avatar/logo.png'></image>
+      <view class="icon-box__title2">好好看房</view>
+    </view>
+  </view>
+  <view class="icon-box-title">
+    <view class="icon-title">{{authorizeTitle}}</view>
+  </view>
+  <view class="icon-box-desc">
+    <view class="icon-remark">• {{authorizeDesc}}</view>
+  </view> 
+  <button class="default-btn btn" bindgetuserinfo="bindGetUserInfo" bindopensetting="openSettingCallback" open-type="{{authorizeopenType}}"> {{authorizeBtn}} </button>
+</view>

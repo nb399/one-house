@@ -4,7 +4,7 @@ class Article extends Base {
   constructor() {
     super();
   }
-/**
+/** 
  * 获的相关推荐
  */
   relationlist(articleType,callback){

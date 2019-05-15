@@ -11,6 +11,7 @@ class Base {
  * 转发
  */
   forward(param, callback){
+    console.log(1)
     var that=this;
     var params={
       url:'forward/forward?type='+param.type+'&id='+param.id,

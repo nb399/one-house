@@ -2,10 +2,10 @@
 <import src="../tpls/products/products-tpl.wxml" />
 
 <view class="topTab">
-  <view class="tabOne {{tab==0?'tabIndex':''}}" data-tab='0' bindtap='_changeTab'>商品</view>
+  <view class="tabOne {{tab==0?'tabIndex':''}}" data-tab='0' bindtap='_changeTab'>楼盘</view>
   <view class="tabOne {{tab==0?'':'tabIndex'}}" data-tab='1' bindtap='_changeTab'>关注</view>
 </view>
-<view wx:if="{{tab==0 && !productsArr[0]}}" style='text-align:center;color:#d1d1d1;margin-top:80rpx'>-还没有收藏商品-</view>
+<view wx:if="{{tab==0 && !productsArr[0]}}" style='text-align:center;color:#d1d1d1;margin-top:80rpx'>-还没有收藏楼盘-</view> 
 
 <template wx:if="{{tab==0}}" is="products" data="{{products:productsArr,mycollection}}" />
 
@@ -20,4 +20,4 @@
     </view>
   </view>
 </view>
-<view wx:if="{{!tab==0 && !attentionlist[0]}}" style='text-align:center;color:#d1d1d1;margin-top:80rpx'>-还没有关注-</view>
+<view wx:if="{{!tab==0 && !attentionlist[0]}}" style='text-align:center;color:#d1d1d1;margin-top:80rpx'>-还没有关注任何人-</view>

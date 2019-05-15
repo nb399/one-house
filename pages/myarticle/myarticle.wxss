@@ -60,7 +60,7 @@ line-height: 100rpx;
 display: flex;
 margin:20rpx 0;
 }
-.Summary_box_main_imgbox image{
+.Summary_box_main_image{
   width: 126rpx;
   height: 126rpx;
   margin-right: 16rpx;

@@ -1,72 +1,111 @@
 <!--pages/attention-people/attention-people.wxml-->
+<wux-dialog id="wux-dialog" />
+
 <view class="user_bar">
-<view class="userInfo">
-<image class="userinfo-avatar_bg" src="{{Person.avatarUrl}}" background-size="cover"></image>
-<view class="userInfo_main">
-<image class="userinfo-avatar" src="{{Person.avatarUrl}}" background-size="cover"></image>
-<text class="userinfo-nickname">{{Person.nickname}}</text>
-<view bindtap='_attention' data-id="{{Person.id}}" class="btn-attention">{{Person.watchlist[0]?'已关注':'关注'}}</view>
-</view>
-</view>
-</view>
-
-
-<scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadImages" bindscrolltoupper="_refresh" upper-threshold='-50' >
-    <view style="width:100%">
-      <!-- 左栏 -->
-        <view class="loading-gif" wx:if="{{loadingCount&&pageIndex<2&&reload}}"><image src="../../imgs/icon/loading-gif.gif"></image></view>
-      <view class="img_item">
-        <view wx:for="{{col1}}" wx:key="id">
-          <view class="article-box" style="margin-right:2%"  bindtap='_look_article' data-id='{{item.id}}'>
-            <image src="{{item.items[0].img_url}}" style="width:100%;height:{{item.height}}px" catchtap="_previewimg" data-imgs="{{item.items}}"></image>
-            <view class="content">
-              <view class="title">       <view class="content-topic">{{item.content}}</view>
-             
-              <image src="../../imgs/icon/recorder-over.png" class="btn-recorder" catchtap='_PlayRecorder' data-url="{{item.recorder[0].recorder_url}}" wx:if="{{item.recorder[0]}}"></image>
-              </view>
-              <view class="content-bottom">
-                <view class="author">
-                  <image src="{{item.avatarUrl}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
-                </view>
-                <view class="praise">
-                  <text class="iconfont {{item.praisepeople[0]?'icon-collected':'icon-collecte'}}" catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}' data-col='{{1}}'> {{item.praise_num}}</text>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
+  <view class="userInfo">
+    <image class="userinfo-avatar_bg" src="{{Person.avatarUrl}}" background-size="cover"></image>
+    <view class="userInfo_main">
+      <image class="userinfo-avatar" src="{{Person.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{(Person.isSaler&&Person.real_name)?Person.real_name:Person.nickname}}</text>
+      <view class="person-detail">
+        <view data-id="{{Person.company_id}}" wx:if="{{!Person.isRobot&&Person.company_name}}" class="build-name" bindtap='_goCompany'>{{'所属楼盘：'+Person.company_name}}</view>
+        <view bindtap='_attention' data-id="{{Person.id}}" class="btn-attention">{{Person.watchlist[0]?'已关注':'关注'}}</view>
       </view>
-      <!-- 右栏 -->
-      <view class="img_item">
-        <view wx:for="{{col2}}" wx:key="id">
-          <view class="article-box" style="margin-left:2%"  bindtap='_look_article' data-id='{{item.id}}'>
-            <image src="{{item.items[0].img_url}}" style="width:100%;height:{{item.height}}px" catchtap="_previewimg" data-imgs="{{item.items}}"></image>
-            <view class="content">
-              <view class="title">
-              
-              <view class="content-topic">{{item.content}}</view>
-             
-              <image src="../../imgs/icon/recorder-over.png" class="btn-recorder" catchtap='_PlayRecorder' data-url="{{item.recorder[0].recorder_url}}" wx:if="{{item.recorder[0]}}"></image>
-              </view>
-              
-              <view class="content-bottom">
-                <view class="author">
-                  <image src="{{item.avatarUrl}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
-                </view>
-                <view class="praise">
-                  <text class="iconfont {{item.praisepeople[0]?'icon-collected':'icon-collecte'}}" catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}' data-col='{{2}}'> {{item.praise_num}}</text>
-                </view>
-              </view>
+
+    </view>
+  </view>
+</view>
+<!-- <view class="user-container">
+<image src="{{Person.avatarUrl}}" mode="aspectFill" class="user-avatar"></image>
+<view class="user-info">
+<view></view>
+</view>
+</view> -->
+
+<!-- 悬浮按钮 -->
+<cover-view class="contact-btn" bindtap='_goHome' style='bottom:350rpx;'>
+  <cover-image src="/imgs/toolbar/gohome.png" class="img-contact"></cover-image>
+  <cover-view>更多</cover-view>
+  </cover-view>
+<cover-view wx:if="{{Person.isSaler&&(Person.phone||Person.wxId)}}" class="contact-btn" bindtap='_showContact'>
+  <cover-image src="/imgs/icon/contact.png" class="img-contact"></cover-image>
+  <cover-view>联系</cover-view> </cover-view>
+<cover-view class="contact-btn"  style='bottom:150rpx;'>
+  <button class="img-contact" open-type='share' hover-class='none'>
+    <cover-image src="/imgs/icon/share.png" class="img-contact"></cover-image>
+    <cover-view>分享</cover-view> 
+  </button>
+</cover-view>
+
+<!-- <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="onReachBottom" upper-threshold='-50'> -->
+<view style="width:100%">
+  <!-- 左栏 -->
+  <view class="loading-gif" wx:if="{{loadingCount&&pageIndex<2&&reload}}">
+    <image src="../../imgs/icon/loading-gif.gif"></image>
+  </view>
+  <view class="img_item">
+    <view wx:for="{{col1}}" wx:key="id">
+      <view class="article-box" style="margin-right:2%;">
+        <video id="{{item.id}}" src="{{item.mainImgUrl}}" style="width:100%;height:{{item.height}}px;background:#f5f5f5;" wx:if="{{item.isVideo}}" enable-progress-gesture='{{false}}' bindplay="_playVideo" show-mute-btn mute initial-time="0.01"></video>
+        <image src="{{item.mainImgUrl+'?x-oss-process=style/jianjin100'}}" style="width:100%;height:{{item.height}}px;background:#f5f5f5;" wx:else bindtap='_look_article' data-id='{{item.id}}'></image>
+        <view class="content">
+          <view class="title">
+            <view class="content-topic" bindtap='_look_article' data-id='{{item.id}}'>{{item.relateBuildId?'#'+item.relateBuildName+' ':''}}{{item.content}}</view>
+            <view style='width:14%;height:100%;' catchtap='_PlayRecorder' data-url="{{item.recorderUrl}}" wx:if="{{item.recorderUrl}}">
+              <image src="../../imgs/icon/recorder-over.png" class="btn-recorder"></image>
+              <image src="/imgs/icon/tip.gif" class="img-tip" style="width:50rpx;height:40rpx;transform:rotate(-90deg);"></image>
+            </view>
+
+          </view>
+          <view class="content-bottom">
+            <view class="author">
+              <image src="{{item.avatarUrl+'?x-oss-process=style/jianjin100'}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
+            </view>
+            <view class="praise">
+              <text class="iconfont {{item.praisepeople[0]?'icon-collected':'icon-collecte'}}" catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}' data-col='{{1}}'> {{item.praise_num}}</text>
             </view>
           </view>
         </view>
       </view>
     </view>
-    <view class="loading-gif" wx:if="{{loadingCount&&pageIndex>2}}"><image src="../../imgs/icon/loading-gif.gif"></image></view>
-  </scroll-view>
+  </view>
+  <!-- 右栏 -->
+  <view class="img_item">
+    <view wx:for="{{col2}}">
+      <view class="article-box" style="margin-left:2%">
+        <video id="{{item.id}}" src="{{item.mainImgUrl}}" style="width:100%;height:{{item.height}}px;background:#f5f5f5;" wx:if="{{item.isVideo}}" enable-progress-gesture='{{false}}' bindplay="_playVideo" show-mute-btn mute initial-time="0.01"></video>
+        <image src="{{item.mainImgUrl+'?x-oss-process=style/jianjin100'}}" style="width:100%;height:{{item.height}}px;background:#f5f5f5;" wx:else bindtap='_look_article' data-id='{{item.id}}'></image>
+        <view class="content">
+          <view class="title">
 
+            <view class="content-topic" bindtap='_look_article' data-id='{{item.id}}'>{{item.relateBuildId?'#'+item.relateBuildName+' ':''}}{{item.content}}</view>
 
+            <view style='width:14%;height:100%;' catchtap='_PlayRecorder' data-url="{{item.recorderUrl}}" wx:if="{{item.recorderUrl}}">
+              <image src="../../imgs/icon/recorder-over.png" class="btn-recorder"></image>
+              <image src="/imgs/icon/tip.gif" class="img-tip" style="width:50rpx;height:40rpx;transform:rotate(-90deg);"></image>
+            </view>
+          </view>
 
-<view style="display:none">
-  <image wx:for="{{loadimgs}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" binderror="_TTTTT" bindload="onImageLoad"></image> 
+          <view class="content-bottom">
+            <view class="author">
+              <image src="{{item.avatarUrl+'?x-oss-process=style/jianjin100'}}" class="avatarUrl" catchtap='_personPage' data-personid='{{item.user_id}}'></image>{{item.author}}
+            </view>
+            <view class="praise">
+              <text class="iconfont {{item.praisepeople[0]?'icon-collected':'icon-collecte'}}" catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}' data-col='{{2}}'> {{item.praise_num}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>
+<view class="loading-gif" wx:if="{{loadingCount&&pageIndex>2}}">
+  <image src="/imgs/icon/loading-gif.gif"></image>
+</view>
+<block wx:if="{{!col1.length>0&&isLoadedAll}}">
+  <view class="show-nothing">
+    <image src="/imgs/icon/nothing@2x.png"></image>
+    <view class="nothing-text">还没有内容</view>
+  </view>
+</block>
+<!-- </scroll-view> -->

@@ -2,7 +2,7 @@
 
   <view class="home-main-videobox" wx:for="{{videolist}}">
   
-    <video bindplay="PlayVideo" id="{{index}}" src="{{item.video_url}}" poster="{{item.poster}}" controls="true" objectFit="fill" />
+    <video bindplay="PlayVideo" id="{{index}}" src="{{item.video_url}}" poster="{{item.poster}}" controls="true" objectFit="contain" muted show-mute-btn/>
     <view class="home-main-videotext">
         <rich-text class="home-main-videotitle" nodes="{{item.title}}" />
       <view class="home-main-videotype" bindtap='_comment' data-id='{{item.id}}'>

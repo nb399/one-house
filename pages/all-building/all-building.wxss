@@ -1,8 +1,10 @@
 /* pages/all-building/all-building.wxss */
+@import '/assets/styles/weui.wxss';
+@import '/assets/styles/skyvow.wxss';
 /* filter */
 .filter-section{
   display: flex;
-  height: 100rpx;
+  height: 70rpx;
   width: 100%;
   align-items: center;
   border-bottom: 1rpx solid #eee;
@@ -22,8 +24,11 @@ border-right: 1rpx solid #eee
 }
 /* list */
 .fang-list-thumb{
-  width: 200rpx;
-  height: 150rpx
+width:280rpx;
+height:170rpx;
+border-radius:6rpx;
+overflow:hidden;
+
 }
 .fang-list-build-type{
 background:#fc5459;
@@ -32,6 +37,6 @@ padding:6rpx 20rpx;
 font-size: 26rpx;
 } 
 .fang-list-info{
-  margin-top: 14rpx;
+  /* margin-top: 14rpx; */
   color: grey;
 }

@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+      "wux-search-bar": "../../dist/search-bar/index",
+      "wux-cell-group": "../../dist/cell-group/index",
+      "wux-input": "../../dist/input/index",
+        "wux-textarea": "../../dist/textarea/index",
+      "wux-select": "../../dist/select/index",
+      "wux-cell": "../../dist/cell/index"
+    }
+}

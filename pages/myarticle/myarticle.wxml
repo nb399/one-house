@@ -9,13 +9,18 @@
         </view>
         <view class="author_box">{{item.author}}</view>
         <view class="article_time">{{item.create_time}}</view>
-        <view class="delete" data-id="{{item.id}}" bindtap="_delete_article">×</view>
+        <view class="delete" data-id="{{item.id}}" data-index="{{index}}" bindtap="_delete_article">×</view>
       </view>
       <view class="Summary_box_main" bindtap='look_article' id="{{item.id}}">
       <view class="Summary_box_main_text">{{item.summary}}</view>
       
           <view class="Summary_box_main_imgbox">
-      <image src="{{imgitem.img_url}}"  wx:if="{{index<5}}" wx:for="{{item.items}}" wx:for-item="imgitem"></image>
+          <block wx:if="{{item.isVideo}}">
+          <video class="Summary_box_main_image" src="{{imgitem}}" wx:if="{{index<5}}" wx:for="{{item.imgList}}" wx:for-item="imgitem"></video>
+      </block>
+      <block wx:else>
+            <image src="{{imgitem+'?x-oss-process=style/jianjin100'}}" wx:if="{{index<5}}" wx:for="{{item.imgList}}" wx:for-item="imgitem" class="Summary_box_main_image"></image> 
+      </block>
       </view>
       </view>
        

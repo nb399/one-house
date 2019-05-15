@@ -20,10 +20,10 @@
     <text class="key-word {{index>2?'grey':''}}" wx:for="{{wordList1}}" bindtap="_quickSearch" data-word="{{item}}">{{item}}
     </text>
   </view>
-  <view class="word-box" wx:if="{{!shouqi}}">
+  <!-- <view class="word-box" wx:if="{{!shouqi}}">
     <text class="key-word2" wx:for="{{wordList2}}" bindtap="_quickSearch" data-word="{{item}}">{{item}}
     </text>
-  </view>
+  </view> -->
 </view>
 
 <view class="history-box" >
@@ -45,12 +45,13 @@
       <text class="{{tabIndex==index?'border-bottom':''}}">{{item}}</text>
     </view>
   </view>
-  <template is="search-video" data="{{videolist:videoArr1,match:1}}" wx:if="{{tabIndex==0}}" />
-  <template is="community-search" data="{{articleArr:articleArr1,match:1}}" wx:if="{{tabIndex==2}}" />
-  <template is="search-products" data="{{productArr:productArr1,match:1}}" wx:if="{{tabIndex==1}}" />
-
-
-   <template is="search-video" data="{{videolist:videoArr2,match:2}}" wx:if="{{tabIndex==0}}" />
-     <template is="community-search" data="{{articleArr:articleArr2,match:2}}" wx:if="{{tabIndex==2}}" />
-       <template is="search-products" data="{{productArr:productArr2,match:2}}" wx:if="{{tabIndex==1}}" />
+  <scroll-view scroll-y="true" style="height:{{systemInfo.windowHeight*systemInfo.pixelRatio-190}}rpx" bindscrolltolower="_loadMoreRes" upper-threshold='-50'>
+  <template is="search-video" data="{{videolist:dataArr,match:1,has_more:has_more}}" wx:if="{{tabIndex==0}}" />
+  <template is="community-search" data="{{articleArr:dataArr,match:1,has_more:has_more}}" wx:if="{{tabIndex==1}}" />
+  <template is="search-products" data="{{productArr:dataArr,match:1,has_more:has_more}}" wx:if="{{tabIndex==2}}" />
+</scroll-view>
+<!-- 
+   <template is="search-video" data="{{videolist:dataArr,match:2}}" wx:if="{{tabIndex==0}}" />
+     <template is="community-search" data="{{articleArr:dataArr,match:2}}" wx:if="{{tabIndex==2}}" />
+       <template is="search-products" data="{{productArr:dataArr,match:2}}" wx:if="{{tabIndex==1}}" /> -->
 </view>

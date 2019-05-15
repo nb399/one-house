@@ -146,8 +146,8 @@ top: 0;
 
 .feature-box {
   
-  width: 96%;
-  padding: 0 2%;
+  width: 94%;
+  padding: 0 3%;
   height: 100rpx;
   display: flex;
   align-items: center;
@@ -167,7 +167,7 @@ top: 0;
 }
 
 .search-box {
-  width: 60%;
+  width: 87%;
   height: 60rpx;
   /* margin-left: 44rpx;
   margin-right: 8rpx; */
@@ -225,8 +225,8 @@ top: 0;
   text-align: center;
   line-height: 50rpx;
   color: #000;
-  transition: font-weight 1s linear;
-  font-weight: 900 !important;
+  /* transition: font-weight 1s linear; */
+  /* font-weight: 900 !important; */
 }
 
 /* 单个图片容器的样式 */
@@ -241,16 +241,24 @@ top: 0;
   box-shadow: 0 6rpx 20rpx 5rpx rgba(0, 0, 0, 0.1);
   margin: 4%;
   border-radius: 6rpx;
+  overflow: hidden;
 }
 
 .content-topic {
-  width: 86%;
-  height: 100%;
+ width:84%;
+height:100%;
+padding-left:2%;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .title {
   display: flex;
-  height: 86rpx;
+  height: 84rpx;
   overflow: hidden;
   font-size: 28rpx;
   width: 96%;
@@ -529,6 +537,8 @@ top: 0;
   content: '\e6b3';
   color: #d1d1d1;
   font-size: 48rpx;
+  padding:0 10rpx;
+
 }
 
 button {

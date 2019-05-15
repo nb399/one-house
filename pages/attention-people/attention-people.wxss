@@ -1,4 +1,44 @@
 /* pages/attention-people/attention-people.wxss */
+
+
+button {
+  position: initial;
+  display: initial;
+  margin-left: initial;
+  margin-right: initial;
+  padding-left: initial;
+  padding-right: initial;
+  box-sizing: initial;
+  font-size: initial;
+  text-align: initial;
+  text-decoration: initial;
+  line-height: initial;
+  border-radius: initial;
+  -webkit-tap-highlight-color: initial;
+  overflow: initial;
+  color: initial;
+  background-color: initial;
+
+
+}
+
+button::after {
+  content: "";
+  width: initial;
+  height: initial;
+  position: initial;
+  top: initial;
+  left: initial;
+  border: initial;
+  -webkit-transform: initial;
+  transform: initial;
+  -webkit-transform-origin: initial;
+  transform-origin: initial;
+  box-sizing: initial;
+  border-radius: initial;
+}
+
+
 .loading-gif{
   display: flex;
   justify-content: center;
@@ -33,8 +73,9 @@
   flex-direction: column;
   align-items: center; 
   justify-content: space-around;
-  top:20rpx;
-  left:280rpx;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
   position:absolute;
   color: #ffffff;
   font-size: 32rpx;
@@ -49,9 +90,69 @@
   text-align: center;
   line-height: 52rpx;font-size: 22rpx;
   border-radius: 6rpx;
+  flex: none;
 }
 
-
+.contact-btn{
+  position: fixed;
+  bottom: 250rpx;
+  right: 30rpx;
+  border-radius: 100rpx;
+ width: 74rpx;
+ height: 74rpx;
+ display: flex;
+ flex-direction: column;
+ background: #000;
+ font-size: 14rpx;
+ color: #fff;
+ align-items: center;
+ justify-content: center;
+  box-shadow:  0 0 2rpx 2rpx rgba(0, 0, 0, 0.2);
+  line-height: initial;
+  padding: 0;
+}
+.img-contact{
+  width: 40rpx;
+  height: 40rpx;
+}
+.person-detail{
+display:flex;
+align-items:center;
+justify-content:center;
+width:700rpx;
+margin:0 auto;
+}
+.build-name{
+color:#fff;
+font-size:24rpx;
+padding:6rpx 30rpx;
+}
+.show-nothing{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50rpx 0;
+  font-size: 28rpx;
+}
+.show-nothing image{
+  width: 230rpx;
+  height: 156rpx;
+}
+.nothing-text{
+  color: #666;
+  font-size: 26rpx;
+  text-align: center;
+  margin: 20rpx 0;
+}
+.go-publish{
+  background: #FF2741;
+  color: #fff;
+  border-radius: 8rpx;
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+}
 /* 瀑布流 */
 /* 单个图片容器的样式 */
 .img_item {
@@ -136,3 +237,4 @@ justify-content: space-between;
    font-size:22rpx;
   color: #d1d1d1;
 }
+

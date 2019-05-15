@@ -1,0 +1,74 @@
+<!-- 关注内容 -->
+<view class="section-attention">
+  <block wx:for="{{attentionArticleList}}">
+    <view class="atention-article" bindtap='_look_article' data-id='{{item.id}}'>
+      <view class="article-top">
+        <image src="{{item.avatarUrl}}" catchtap='_personPage' data-personid='{{item.user_id}}'></image>
+        <view class="AA-toptext">
+          <text class="AA-author">{{item.author}}</text>
+          <text class="AA-formatTime">{{item.format_time}}</text>
+        </view>
+      </view>
+      <view class="article-main">
+        <text class="AA-topic">{{item.content}}</text>
+        <!-- <text class="AA-content">{{item.content}}</text> -->
+        <block  wx:if="{{item.isVideo}}">
+        <video class="article-media-container" src="{{item.imgList[0]}}" objectFit='contain' muted show-mute-btn bindplay='_playVideo' id="{{item.id}}" enable-progress-gesture='{{false}}' initial-time="0.01"></video>
+        </block>
+        <block wx:else>
+        <swiper class="article-media-container" indicator-dots='{{item.imgList.length>1}}'>
+        <swiper-item wx:for="{{item.imgList}}" wx:for-item="imgItem">
+                <image src="{{imgItem}}" mode="aspectFill" ></image>
+        </swiper-item>
+        </swiper>
+        </block>
+      </view>
+      <view class="article-feature">
+        <button open-type='share' class="Summary_Forward" catchtap='_Forward' data-item='{{item}}' data-id='{{item.id}}' hover-class='none'>
+          <image src="/imgs/icon/zhuanfa.png"></image> {{item.forward_num}}
+        </button>
+        <text class="iconfont icon-message" space='nbsp'> {{item.comment_num}}</text>
+        <text class="iconfont {{item.praisepeople[0]?'icon-aixined':'icon-aixin'}}" space='nbsp' catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}'> {{item.praise_num}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{index==0}}">
+      <view class="AA-greyline"></view>
+      <view class="recommended-background">
+        <text space='nbsp'>   你可能感兴趣的用户</text>
+        <scroll-view scroll-x='true' style='width:{{windowWidth}}px;background:#ffffff'>
+          <view class="recommended-scrollbox">
+            <view class="recommended-box" wx:for="{{recommendedList}}">
+              <image src="{{item.avatarUrl}}" catchtap='_personPage' data-personid='{{item.uid}}'></image>
+              <view class="recommended-main">
+                <text class="recommended-name">{{item.nickname}}</text>
+                <view class="recommended-bt {{item.attentioned?'recommended-had':''}}" data-id="{{item.uid}}" data-index='{{index}}' catchtap='_attention'>关注</view>
+                <!-- <view class="recommended-had" wx:else data-id="{{item.uid}}" data-index='{{index}}' catchtap='_attention'>已关注</view> -->
+              </view>
+            </view>
+          </view>
+
+        </scroll-view>
+      </view>
+    </view>
+  </block>
+  <view wx:if="{{attentionArticleList.length==0}}">
+    <view class="AA-greyline"></view>
+    <view class="recommended-background">
+      <text space='nbsp'>   你可能感兴趣的用户</text>
+      <scroll-view scroll-x='true' style='width:{{windowWidth}}px;background:#ffffff'>
+        <view class="recommended-scrollbox">
+          <view class="recommended-box" wx:for="{{recommendedList}}">
+            <image src="{{item.avatarUrl}}" catchtap='_personPage' data-personid='{{item.uid}}'></image>
+            <view class="recommended-main">
+              <text class="recommended-name">{{item.nickname}}</text>
+              <view class="recommended-bt" wx:if="{{!item.attentioned}}" data-id="{{item.uid}}" data-index='{{index}}' catchtap='_attention'>关注</view>
+              <view class="recommended-had" wx:else data-id="{{item.uid}}" data-index="{{index}}" catchtap='_attention'>已关注</view>
+            </view>
+          </view>
+        </view>
+
+      </scroll-view>
+    </view>
+  </view>
+</view>

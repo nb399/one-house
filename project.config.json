@@ -1,16 +1,16 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.1",
+	"libVersion": "2.6.1",
 	"appid": "wxed9e2a27e34c9148",
-	"projectname": "fang_dev",
+	"projectname": "fang2.0",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -29,11 +29,11 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 14,
 			"list": [
 				{
 					"id": 0,
-					"name": "11",
+					"name": "首页",
 					"pathName": "pages/home/home",
 					"query": "personid=6"
 				},
@@ -45,9 +45,9 @@
 				},
 				{
 					"id": 2,
-					"name": "11",
-					"pathName": "pages/article/article",
-					"query": "article_id=407"
+					"name": "楼盘公司详情",
+					"pathName": "pages/one-building/one-building",
+					"query": "build_id=10001&type=company&company_id=10001"
 				},
 				{
 					"id": 3,
@@ -64,7 +64,7 @@
 				{
 					"id": 5,
 					"name": "search",
-					"pathName": "pages/category/category",
+					"pathName": "pages/search/search",
 					"query": ""
 				},
 				{
@@ -74,10 +74,52 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 7,
 					"name": "楼盘详情",
 					"pathName": "pages/one-building/one-building",
-					"query": "build_id=10001"
+					"query": "type=build&build_id=10030&company_id=10015"
+				},
+				{
+					"id": 8,
+					"name": "我的",
+					"pathName": "pages/my/my",
+					"query": ""
+				},
+				{
+					"id": 9,
+					"name": "帖子详情",
+					"pathName": "pages/article/article",
+					"query": "article_id=20"
+				},
+				{
+					"id": -1,
+					"name": "我发布的",
+					"pathName": "pages/myarticle/myarticle",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pbl",
+					"pathName": "pages/pbl/pbl",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "关心",
+					"pathName": "pages/attention/attention",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "admin",
+					"pathName": "pages/admin/admin",
+					"query": ""
+				},
+				{
+					"id": 14,
+					"name": "个人主页",
+					"pathName": "pages/attention-people/attention-people",
+					"query": "personid=10000"
 				}
 			]
 		}

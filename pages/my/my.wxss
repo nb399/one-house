@@ -1,29 +1,83 @@
 @import "../tpls/base.wxss";
 
 
+button {
+  position: initial;
+  display: initial;
+  margin-left: initial;
+  margin-right: initial;
+  padding-left: initial;
+  padding-right: initial;
+  box-sizing: initial;
+  font-size: initial;
+  text-align: initial;
+  text-decoration: initial;
+  line-height: initial;
+  border-radius: initial;
+  -webkit-tap-highlight-color: initial;
+  overflow: initial;
+  color: initial;
+  background-color: initial;
+  width:auto;
+height:auto;
+padding:0;
+
+}
+
+button::after {
+  content: "";
+  width: initial;
+  height: initial;
+  position: initial;
+  top: initial;
+  left: initial;
+  border: initial;
+  -webkit-transform: initial;
+  transform: initial;
+  -webkit-transform-origin: initial;
+  transform-origin: initial;
+  box-sizing: initial;
+  border-radius: initial;
+}
+
 .my-container{
     background-color:#EDEDED;
 }
 .my-header{
   border-top: 1rpx solid #000;
-   width: 690rpx;
+   width: 100%;
    height: 210rpx;
     color: #fff;
-    display: flex;
-    align-items: center;
-    padding: 30rpx;
     font-size: 28rpx;
-    background-image: url('https://www.ishtml.com/public/upload/my_bg.gif');
+    position: relative;
 }
+.my-hearder-bg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 98;
+}
+.my-header-user{
+  position: absolute;
+  z-index: 99;
+  top: 50%;
+  left: 30rpx;
+  transform: translateY(-50%);
+  display:flex;
+align-items:center;
 
-.my-header image{
+}
+.my-header-user image{
     height: 110rpx;
     width: 110rpx;
     border-radius: 100rpx;
     border: 2rpx solid #fff;
 }
-.my-header text{
+.my-header-user text{
     margin-left: 20rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .my-address{
     background-color: #fff;
@@ -79,13 +133,19 @@
 }
 
 .item-title{
-    padding: 25rpx 0;
-    color: #999999;
-    text-align: center;
-    border-bottom: 1rpx solid #EDEDED;
-    font-size: 28rpx;
-    background-color: #fff;
-    position: relative;
+   padding:25rpx 0;
+color:#999999;
+text-align:center;
+border-bottom:1rpx solid #EDEDED;
+font-size:28rpx;
+background-color:#fff;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+.title-text{
+  flex: 1;
+  text-align: center;
 }
 .item-title image{
     position: absolute;

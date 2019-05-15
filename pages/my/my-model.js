@@ -22,7 +22,7 @@ class My extends Base {
           fail: function (res) {
             typeof cb == "function" && cb({
               avatarUrl: '../../imgs/icon/user@default.png',
-              nickName: '零食小贩'
+              nickName: '看客'
             });
           }
 

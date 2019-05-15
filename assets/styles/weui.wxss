@@ -733,7 +733,6 @@ icon {
 }
 .weui-panel {
   background-color: #FFFFFF;
-  margin-top: 10px;
   position: relative;
   overflow: hidden;
 }
@@ -778,7 +777,7 @@ icon {
   left: 15px;
 }
 .weui-media-box {
-  padding: 15px;
+padding:20rpx 30rpx;
   position: relative;
 }
 .weui-media-box:before {
@@ -817,7 +816,7 @@ icon {
   -webkit-line-clamp: 2;
 }
 .weui-media-box__info {
-  margin-top: 15px;
+  /* margin-top: 15px; */
   padding-bottom: 5px;
   font-size: 13px;
   color: #CECECE;
@@ -828,6 +827,7 @@ icon {
 .weui-media-box__info__meta {
   float: left;
   padding-right: 1em;
+  margin-top: 10rpx;
 }
 .weui-media-box__info__meta_extra {
   padding-left: 1em;

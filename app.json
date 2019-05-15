@@ -1,27 +1,101 @@
 {
   "pages": [
     "pages/pbl/pbl",
+    "pages/my/my",
+    "pages/publish/publish",
+    "pages/attention/attention",
     "pages/home/home",
+    "pages/myarticle/myarticle",
     "pages/login/login",
     "pages/attention-people/attention-people",
-    "pages/search/search",
-    "pages/message/message",
-    "pages/myorder/myorder",
-    "pages/copywriting/copywriting",
-    "pages/mycollection/mycollection",
-    "pages/all-building/all-building",
-    "pages/one-building/one-building",
-    "pages/publish/publish",
-    "pages/myarticle/myarticle",
-    "pages/article/article",
-    "pages/product/product",
-    "pages/theme/theme",
-    "pages/category/category",
-    "pages/cart/cart",
-    "pages/order/order",
-    "pages/pay-result/pay-result",
-    "pages/my/my",
-    "pages/community/community"
+    "pages/auth/auth",
+    "pages/admin/admin"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/community/",
+      "pages": [
+        "community"
+      ]
+    },
+    {
+      "root": "pages/pay-result/",
+      "pages": [
+        "pay-result"
+      ]
+    },
+    {
+      "root": "pages/order/",
+      "pages": [
+        "order"
+      ]
+    },
+    {
+      "root": "pages/cart/",
+      "pages": [
+        "cart"
+      ]
+    },
+    {
+      "root": "pages/category/",
+      "pages": [
+        "category"
+      ]
+    },
+    {
+      "root": "pages/theme/",
+      "pages": [
+        "theme"
+      ]
+    },
+    {
+      "root": "pages/product/",
+      "pages": [
+        "product"
+      ]
+    },
+    {
+      "root": "pages/article/",
+      "pages": [
+        "article"
+      ]
+    },
+    {
+      "root": "pages/one-building/",
+      "pages": [
+        "one-building"
+      ]
+    },
+    {
+      "root": "pages/all-building/",
+      "pages": [
+        "all-building"
+      ]
+    },
+    {
+      "root": "pages/mycollection/",
+      "pages": [
+        "mycollection"
+      ]
+    },
+    {
+      "root": "pages/myorder/",
+      "pages": [
+        "myorder"
+      ]
+    },
+    {
+      "root": "pages/message/",
+      "pages": [
+        "message"
+      ]
+    },
+    {
+      "root": "pages/search/",
+      "pages": [
+        "search"
+      ]
+    }
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -34,27 +108,39 @@
   "tabBar": {
     "list": [
       {
+        "iconPath": "imgs/toolbar/home.png",
+        "selectedIconPath": "imgs/toolbar/home2.png",
         "pagePath": "pages/home/home",
-        "text": "首页",
-        "iconPath": "imgs/toolbar/home.jpg",
-        "selectedIconPath": "imgs/toolbar/home@selected.jpg"
+        "text": "首页"
       },
       {
+        "iconPath": "imgs/toolbar/fast.png",
+        "selectedIconPath": "imgs/toolbar/fast2.png",
         "pagePath": "pages/pbl/pbl",
-        "iconPath": "imgs/toolbar/community.png",
-        "selectedIconPath": "imgs/toolbar/community@selected.png",
         "text": "发现"
       },
       {
-        "pagePath": "pages/my/my",
+        "iconPath": "imgs/toolbar/publish.png",
+        "selectedIconPath": "imgs/toolbar/publish.png",
+        "pagePath": "pages/publish/publish",
+        "text": ""
+      },
+      {
+        "iconPath": "imgs/toolbar/see.png",
+        "selectedIconPath": "imgs/toolbar/see2.png",
+        "pagePath": "pages/attention/attention",
+        "text": "关心"
+      },
+      {
         "iconPath": "imgs/toolbar/my.png",
-        "selectedIconPath": "imgs/toolbar/my@selected.png",
+        "selectedIconPath": "imgs/toolbar/my2.png",
+        "pagePath": "pages/my/my",
         "text": "我的"
       }
     ],
     "borderStyle": "black",
     "selectedColor": "#fc5459",
-    "color": "#A2A2A2",
+    "color": "#333333",
     "backgroundColor": "#ffffff"
   },
   "networkTimeout": {

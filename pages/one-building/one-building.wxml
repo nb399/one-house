@@ -36,8 +36,10 @@
       </swiper-item>
     </swiper>
     <cover-view class="fixed-top {{topBarChanged?'top-skin2':''}}" hidden='{{hideCoverView}}'>
-      <cover-image bindtap="actShare" src="{{topBarChanged?'/imgs/icon/icon-share-light.png':'/imgs/icon/icon-share-white.png'}}"></cover-image>
-      <cover-image bindtap="collectAct" src="{{activityData.isUserActivityCollect==1?'/imgs/icon/icon-collected.png':(topBarChanged?'/imgs/icon/icon-collect-light.png':'/imgs/icon/icon-collect.png')}}"></cover-image>
+      <button open-type='share' style="padding:0;width:initial;" hover-class="none">
+        <cover-image src="{{topBarChanged?'/imgs/icon/icon-share-light.png':'/imgs/icon/icon-share-white.png'}}"></cover-image>
+      </button>
+      <cover-image bindtap="collectCompany" src="{{buildData.collectpeople[0]?'/imgs/icon/icon-collected.png':(topBarChanged?'/imgs/icon/icon-collect-light.png':'/imgs/icon/icon-collect.png')}}" wx:if="{{type=='company'}}"></cover-image>
     </cover-view>
     <view class="preview-title-box">
       <view class="preview-type-tips">{{buildData.build_type}}</view>
@@ -57,22 +59,22 @@
   </view>
   <view class="info-icon-text">
     <image src="/imgs/icon/icon-money.png"></image>均价
-    <text class='heigh' space='emsp' selectable wx:if="{{buildData.price}}">{{' '+(buildData.price==null?'暂无':buildData.price+'元/㎡')}} </text>
+    <text class='heigh' space='emsp' selectable>{{' '+((buildData.price==''||buildData.price==null)?'价格未定':buildData.price+'元/㎡')}} </text>
   </view>
   <view class="info-icon-text">
     <image src="/imgs/icon/icon-time.png"></image>
-    {{buildData.build_type}} {{buildData.show_time}}
+    {{buildData.build_type}} {{buildData.build_type_id==3?buildData.show_time:buildData.build_type_id==4?buildData.check_in_time:buildData.build_type_id==5?(buildData.rocking_time?buildData.rocking_time:'时间未定'):buildData.build_type_id==6?buildData.rocking_time:''}}
   </view>
   <view class="info-icon-text">
-    <image src="/imgs/icon/icon-time.png"></image>
-    交房时间 {{buildData.show_time}}
+    <image src="/imgs/icon/icon-delivery.png"></image>
+    交房时间 {{buildData.delivery_time?buildData.delivery_time:'时间未定'}}
   </view>
   <!-- 置业顾问 -->
 
   <view class="announcer-title">置业顾问</view>
-  <view bindtap='goUser' class="announcer-box" data-id="{{SalerMain[0].user_id}}">
+  <view bindtap='goUser' class="announcer-box" data-id="{{SalerMain[0].user_id}}" wx:if="{{SalerMain[0]}}">
     <view class="announcer-name">
-      <text>来认识一下{{' '+SalerMain[0].name}}</text>
+      <text>来联系一下{{' '+SalerMain[0].name}}</text>
       <text style="margin-top:12rpx">进入TA的主页</text>
       <!-- <view class="name-tips">组织者</view> -->
     </view>
@@ -80,7 +82,7 @@
   </view>
   <!-- 小置业顾问 start -->
   <view class="member-main" wx:if="{{SalersArr.length>0}}">
-  <view class="grey-line-60"></view>
+    <view class="grey-line-80"></view>
 
     <view class="member-body">
       <scroll-view class="member-list-sv" scroll-x="true">
@@ -100,110 +102,136 @@
   <!-- 小置业顾问 end -->
   <view class="grey-bar"></view>
   <!-- 数据表格 -->
-  <view class="announcer-title">摇号数据</view>
-  <view class="table">
-    <view class="tr">
-      <view class="th">摇号信息</view>
-      <view class="th">全部</view>
-      <view class="th">无房</view>
-      <view class="th">有房</view>
+  <block wx:if="{{type=='build'}}">
+    <view class="announcer-title">摇号数据</view>
+    <view class="table">
+      <view class="tr">
+        <view class="th">摇号信息</view>
+        <view class="th">全部</view>
+        <view class="th">无房</view>
+        <view class="th">有房</view>
+      </view>
+      <view class="tr">
+        <view class="td">房源套数</view>
+        <view class="td">{{buildData.all_build_num==null?'暂无':buildData.all_build_num+'套'}}</view>
+        <view class="td">{{buildData.no_home_build_num==null?'暂无':buildData.no_home_build_num+'套'}}</view>
+        <view class="td">{{buildData.have_home_build_num==null?'暂无':buildData.have_home_build_num+'套'}}</view>
+      </view>
+      <view class="tr">
+        <view class="td">登记人数</view>
+        <view class="td">{{buildData.all_register_num==null?'暂无':buildData.all_register_num+'人'}}</view>
+        <view class="td">{{buildData.no_home_register_num==null?'暂无':buildData.no_home_register_num+'人'}}</view>
+        <view class="td">{{buildData.have_home_register_num==null?'暂无':buildData.have_home_register_num+'人'}}</view>
+      </view>
+      <view class="tr">
+        <view class="td">中签概率</view>
+        <view class="td">{{buildData.all_probability==null?'暂无':buildData.all_probability}}</view>
+        <view class="td">{{buildData.no_home_probability==null?'暂无':buildData.no_home_probability}}</view>
+        <view class="td">{{buildData.have_home_probability==null?'暂无':buildData.have_home_probability}}</view>
+      </view>
     </view>
-    <view class="tr">
-      <view class="td">房源套数</view>
-      <view class="td">{{buildData.all_build_num==null?'暂无':buildData.all_build_num+'套'}}</view>
-      <view class="td">{{buildData.no_home_build_num==null?'暂无':buildData.no_home_build_num+'套'}}</view>
-      <view class="td">{{buildData.have_home_build_num==null?'暂无':buildData.have_home_build_num+'套'}}</view>
+    <view class="grey-bar"></view>
+  </block>
+  <!-- 楼盘公司历史 -->
+  <block wx:if="{{type=='company'}}">
+    <view class="announcer-title">开盘记录</view>
+    <view class="ever-list" wx:if="{{everBuildArr.length>0}}">
+      <view wx:for="{{everBuildArr}}" bindtap='goBuildDetail' data-id="{{item.id}}" class="ever-list-item">
+        <view class="ever-list-item-name">{{item.name}}</view>
+        <!-- <view>{{item.build_type_id==3?item.show_time:item.build_type_id==4?item.check_in_time:item.build_type_id==5?(item.rocking_time?item.rocking_time:'时间未定'):item.build_type_id==6?item.rocking_time:''}}</view> -->
+        <view class="ever-list-item-type">{{item.build_type_id==3?item.show_time:item.build_type_id==4?item.check_in_time:item.build_type_id==5?(item.rocking_time?item.rocking_time:'时间未定'):item.build_type_id==6?item.rocking_time:''}}{{' '+item.build_type}}</view>
+        <image src="/imgs/icon/arrow@right.png" class="ever-list-icon-right"></image>
+      </view>
     </view>
-    <view class="tr">
-      <view class="td">登记人数</view>
-      <view class="td">{{buildData.all_register_num==null?'暂无':buildData.all_register_num+'套'}}</view>
-      <view class="td">{{buildData.no_home_register_num==null?'暂无':buildData.no_home_register_num+'套'}}</view>
-      <view class="td">{{buildData.have_home_register_num==null?'暂无':buildData.have_home_register_num+'套'}}</view>
-    </view>
-    <view class="tr">
-      <view class="td">中签概率</view>
-      <view class="td">{{buildData.all_probability==null?'暂无':buildData.all_probability}}</view>
-      <view class="td">{{buildData.no_home_probability==null?'暂无':buildData.no_home_probability}}</view>
-      <view class="td">{{buildData.have_home_probability==null?'暂无':buildData.have_home_probability}}</view>
-    </view>
+    <view class="grey-bar"></view>
+  </block>
+  <!-- 户型图 -->
+  <view class="announcer-title">
+    <view>户型图</view>
+    <view bindtap='previewHousePlan' data-urls="{{buildData.housePlanArr}}" class="announcer-title-right" wx:if="{{buildData.housePlanArr.length>0}}">全部</view>
+  </view>
+  <cy-imgs-box imgs="{{buildData.housePlanArr}}" imgs-box="imgs-box" bindtap='previewHousePlan' data-urls="{{buildData.housePlanArr}}" wx:if="{{buildData.housePlanArr.length>0}}"></cy-imgs-box>
+  <view class="show-nothing" wx:else>
+    <text>暂无户型图</text>
   </view>
   <view class="grey-bar"></view>
 
-  <!-- 户型图 -->
-  <view class="announcer-title"><view>户型图</view><view bindtap='showGallery' data-urls="{{buildData.housePlanArr}}" class="announcer-title-right">全部</view> </view>
-    <cy-imgs-box imgs="{{buildData.housePlanArr}}" imgs-box="imgs-box" bindtap='showGallery' data-urls="{{buildData.housePlanArr}}"></cy-imgs-box>
-
-  <!-- <scroll-view scroll-x style="width:100%;white-space:nowrap;">
-    <view wx:for="{{buildData.housePlanArr}}" class="imgs-scroll-plan">
-      <image src="{{item}}" mode='aspectFill' bindtap='previewImgs' class="imgs-scroll-plan-img"></image>
-      <view class="imgs-scroll-plan-name">三室两厅</view>
-    </view>
-  </scroll-view> -->
-    <view class="grey-bar"></view>
-
   <!-- 报名名单 end -->
-  <view class="announcer-title">楼盘详情<view bindtap='' class="announcer-title-right">公示方案 〉</view></view>
-  <view class='build-content'>
-    <text class='act-detail' bindlongtap="clipboardActDetail">{{!showMoreDetail?summary:buildData.house_source_info}}</text>
-    <text wx:if="{{!showMoreDetail}}" bindtap='showMoreDetail' style="color:#00848a">{{"阅读更多"}}</text>
-  </view>
-  <!-- 位置地图 start -->
-  <map scale="15" hidden='{{!mapUpdated}}' bindupdated="mapUpdated" id="myMap" style="height:400rpx;width:100%; margin:30rpx 0 0 0;z-index:98;position:relative;" latitude="{{buildData.areaLat}}" longitude="{{buildData.areaLng}}" markers="{{markers}}" show-location>
-    <!-- 等待官方支持cover-view touchmove事件-->
-    <cover-image catchtap='openMap' class='map-cover-img' src="/imgs/zoom.png"></cover-image>
-  </map>
-
+  <block wx:if="{{buildData.house_source_info}}">
+    <view class="announcer-title">楼盘详情
+      <view bindtap='showPublicPlan' class="announcer-title-right" wx:if="{{buildData.publicity_plan_imgs.length>0}}">公示方案 〉</view>
+    </view>
+    <view class='build-content'>
+      <text class='act-detail' bindlongtap="clipboardActDetail">{{!showMoreDetail?summary:buildData.house_source_info}}</text>
+      <text wx:if="{{!showMoreDetail}}" bindtap='showMoreDetail' style="color:#00848a">{{"阅读更多"}}</text>
+    </view>
+    <!-- 位置地图 start -->
+    <map scale="15" hidden='{{!mapUpdated}}' bindupdated="mapUpdated" id="myMap" style="height:400rpx;width:100%; margin:30rpx 0 0 0;z-index:98;position:relative;" latitude="{{buildData.areaLat}}" longitude="{{buildData.areaLng}}" markers="{{markers}}" show-location
+      enable-scroll="{{false}}">
+      <!-- 等待官方支持cover-view touchmove事件-->
+      <cover-image catchtap='openMap' class='map-cover-img' src="/imgs/zoom.png"></cover-image>
+    </map>
+  </block>
   <!-- 位置地图 end -->
 
 
   <!-- 跑盘 -->
-    <view class="announcer-title">实地跑盘 <image src="/imgs/icon/icon-add-article.png" class="announcer-title-right-icon" bindtap='goPublish'></image></view>
-    <view class="run-article-container">
-  <block wx:for="{{ArticleArr}}">
-    <view class="atention-article" bindtap='_look_article' data-id='{{item.id}}'>
-      <view class="article-top">
-        <image src="{{item.avatarUrl}}" catchtap='goUser' data-id='{{item.user_id}}'></image>
-        <view class="AA-toptext">
-          <text class="AA-author">{{item.author}}</text>
-          <text class="AA-formatTime">{{item.formatTime}}</text>
+  <view class="announcer-title">实地跑盘
+    <image src="/imgs/icon/icon-add-article.png" class="announcer-title-right-icon" bindtap='goPublish'></image>
+  </view>
+  <view class="run-article-container">
+    <block wx:if="{{ArticleArr.length>0}}">
+      <block wx:for="{{ArticleArr}}">
+        <view class="atention-article" bindtap='_look_article' data-id='{{item.id}}'>
+          <view class="article-top">
+            <image src="{{item.avatarUrl}}" catchtap='goUser' data-id='{{item.user_id}}'></image>
+            <view class="AA-toptext">
+              <text class="AA-author">{{item.author}}</text>
+              <text class="AA-formatTime">{{item.formatTime}}</text>
+            </view>
+          </view>
+          <view class="article-main">
+            <text class="AA-topic">{{item.content}}</text>
+            <!-- <text class="AA-content">{{item.content}}</text> -->
+            <swiper class="article-list-swiper" indicator-dots="{{item.imgList.length>1}}" wx:if="{{!item.isVideo}}">
+              <swiper-item wx:for="{{item.imgList}}" wx:for-item="imgsItem">
+                <image src='{{imgsItem}}' mode="aspectFill"></image>
+              </swiper-item>
+            </swiper>
+              <video wx:if="{{item.isVideo}}" class="article-media-container" src="{{item.imgList[0]}}" objectFit='contain' muted show-mute-btn initial-time="0.01"></video>
+            <!-- <image src="{{item.items[0].img_url}}" mode="aspectFill"></image> -->
+          </view>
+          <view class="article-feature">
+            <button open-type='share' class="Summary_Forward" catchtap='_Forward' data-item='{{item}}' data-id='{{item.id}}' data-type="article" hover-class='none'>
+              <image src="/imgs/icon/zhuanfa.png"></image> {{item.forward_num}}
+            </button>
+            <text class="iconfont icon-message" space='nbsp'> {{item.comment_num}}</text>
+            <text class="iconfont {{item.praisepeople[0]?'icon-aixined':'icon-aixin'}}" space='nbsp' catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}'> {{item.praise_num}}</text>
+          </view>
         </view>
+        <view class="AA-greyline"></view>
+      </block>
+    </block>
+    <block wx:else>
+      <view class="show-nothing">
+        <text>暂无跑盘记录。\n 去帮大家跑一下这个盘吧~</text>
       </view>
-      <view class="article-main">
-        <text class="AA-topic">{{item.content}}</text>
-        <!-- <text class="AA-content">{{item.content}}</text> -->
-        <swiper class="article-list-swiper" indicator-dots>
-        <swiper-item wx:for="{{item.items}}" wx:for-item="imgsItem">
-        <image src='{{imgsItem.img_url}}' mode="aspectFill"></image>
-        </swiper-item>
-        </swiper>
-        <!-- <image src="{{item.items[0].img_url}}" mode="aspectFill"></image> -->
-      </view>
-      <view class="article-feature">
-        <button open-type='share' class="Summary_Forward" catchtap='_Forward'  data-item='{{item}}' data-id='{{item.id}}' data-type="article" hover-class='none'>
-          <image src="/imgs/icon/zhuanfa.png"></image> {{item.forward_num}}
-        </button>
-        <text class="iconfont icon-message" space='nbsp'> {{item.comment_num}}</text>
-        <text class="iconfont {{item.praisepeople[0]?'icon-aixined':'icon-aixin'}}" space='nbsp' catchtap='_Praise' data-id='{{item.id}}' data-index='{{index}}'> {{item.praise_num}}</text>
-      </view>
-    </view>
-    <view class="AA-greyline"></view>
-  </block>
-</view>
+    </block>
+  </view>
   <!-- 站位 -->
   <view style="height:150rpx;width:100%"></view>
   <!-- 底部栏 -->
   <block wx:if="{{!loading}}">
     <cover-view class="extra {{titleBarChanged?'skin2':''}}" hidden='{{hideCoverView}}'>
       <cover-view class="extra-container">
-        <cover-view open-type="share" class="extra-button-haveicon" bindtap="actShare" data-statu="open">
+        <button open-type="share" class="extra-button-haveicon" hover-class='none'>
           <cover-image class='icon' src='{{titleBarChanged?"/imgs/icon/icon-share-b.png":"/imgs/icon/icon-share.png"}}'></cover-image>
-          <cover-view>分享</cover-view>
-        </cover-view>
-        <cover-view class="extra-button2" bindtap='goGroupChat'>
-          <cover-view>跑盘</cover-view>
+        </button>
+        <cover-view class="extra-button2" bindtap='goFast'>
+          <cover-view>全部楼盘</cover-view>
         </cover-view>
 
-        <cover-view class="extra-button-main {{titleBarChanged?'btn-skin2':''}}" data-type="0">摇号结果</cover-view>
+        <cover-view class="extra-button-main {{titleBarChanged?'btn-skin2':''}}" data-type="0" bindtap='goPublish'>实地跑盘</cover-view>
 
 
       </cover-view>

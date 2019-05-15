@@ -1,5 +1,7 @@
 // pages/myarticle/myarticle.js
-import { Article } from '../myarticle/myarticle-model.js';
+import {
+  Article
+} from '../myarticle/myarticle-model.js';
 var article = new Article;
 Page({
 
@@ -15,7 +17,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
     that._loadData();
 
@@ -23,27 +25,27 @@ Page({
   /**
    * 加载数据
    */
-  _loadData: function (callback) {
+  _loadData: function(callback) {
     var that = this;
-    article.getArticles(this.data.pageIndex, (res) => {
+    article.getArticles(that.data.pageIndex, (res) => {
       var data = res.data;
-
       if (data.length > 0) {
-        this.data.articleArr.push.apply(this.data.articleArr, data);
-        this.setData({
-          articleArr: this.data.articleArr
+        for (let i in data) {
+          data[i].imgList = data[i].imgList.split(',');
+        }
+        that.setData({
+          articleArr: that.data.articleArr.concat(data)
         });
-      }
-      else {
+      } else {
         this.data.isLoadedAll = true;
       }
       callback && callback();
     })
   },
   /**
- * 点击查看帖
- */
-  look_article: function (e) {
+   * 点击查看帖
+   */
+  look_article: function(e) {
     console.log(e)
     var article_id = e.currentTarget.id;
     wx.navigateTo({
@@ -53,23 +55,21 @@ Page({
   /**
    * 删除帖
    */
-  _delete_article: function (e) {
+  _delete_article: function(e) {
     var that = this;
+    var current = e.currentTarget.dataset.index;
     wx.showModal({
       title: '删除此帖',
       content: '确定要删除吗？？',
-      success: function (res) {
+      success: function(res) {
         console.log(e.currentTarget.dataset.id);
-
         if (res.confirm) {
           console.log('用户点击确定')
           var id = e.currentTarget.dataset.id;
-
-
           article.deleteArticle(id, (res) => {
-       console.log(res)
+            that.data.articleArr.splice(current, 1);
             that.setData({
-              articleArr: res.data
+              articleArr: that.data.articleArr
             })
           })
         } else if (res.cancel) {
@@ -80,9 +80,9 @@ Page({
   },
 
   /**
- * 页面上拉触底事件的处理函数
- */
-  onReachBottom: function () {
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
     console.log(666)
     console.log(this.data.pageIndex);
     if (!this.data.isLoadedAll) {
@@ -95,35 +95,35 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
@@ -131,7 +131,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -1,4 +1,5 @@
 // pages/login/login.js
+
 import { Token } from '../../utils/token.js';
 var app=getApp();
 Page({
@@ -44,16 +45,19 @@ return ret;
             });
             wx.setStorageSync('userinfo', res.userInfo)
             console.log(fromPath)
-            if (fromPath != '/pages/pbl/pbl') {
-              wx.redirectTo({
-                url: fromPath+'?article_id='+app.globalData.options.query.article_id,
-              })
-            }
-            else {
-              wx.switchTab({
-                url: fromPath,
-              })
-            }
+            wx.switchTab({
+              url: '/pages/pbl/pbl',
+            })
+            // if (fromPath != '/pages/pbl/pbl') {
+            //   wx.redirectTo({
+            //     url: fromPath+'?article_id='+app.globalData.options.query.article_id,
+            //   })
+            // }
+            // else {
+            //   wx.switchTab({
+            //     url: fromPath,
+            //   })
+            // }
           },
           fail: function (res) {
             console.log(res)

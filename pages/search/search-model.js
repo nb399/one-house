@@ -8,7 +8,7 @@ class Search extends Base {
 
   GetWorldlist(callback){
     var params={
-      url:"search/worldlist",
+      url:"search/worldlist?type_id=0",
       sCallback:function(res){
         callback && callback(res);
       }
@@ -16,9 +16,9 @@ class Search extends Base {
     this.request(params);
   }
  
-  GoToSearch(keyword, callback) {
+  GoToSearch(page,searchType,keyword, callback) {
     var params = {
-      url: "search/all?keyword=" + keyword,
+      url: "search/all?keyword=" + keyword + "&searchType=" + searchType + "&page=" + page,
       sCallback: function (res) {
         callback && callback(res);
       }

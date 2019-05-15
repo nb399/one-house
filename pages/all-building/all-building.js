@@ -14,7 +14,7 @@ Page({
     buildAreasIndex: 0,
     area_type_id: 0,
     buildAreas: [{
-        id: 0,
+        id: 0, 
         title: '全部区域'
       }, {
         id: 330002,
@@ -63,10 +63,13 @@ Page({
     buildTypes: [{
       id: 0,
       title: '全楼楼盘'
-    }, {
-      id: 2,
-      title: '即将拿证'
-    }, {
+    }, { 
+      id: 1,
+      title: '暂未开盘'
+      },{
+        id: 2,
+        title: '即将拿证'
+      }, {
       id: 3,
       title: '正在公示'
     }, {
@@ -83,12 +86,29 @@ Page({
     page: 0,
 
   },
-
+ 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     var that = this;
+    var area_type_id = options.area_type_id ? options.area_type_id:0;
+    var build_type_id = options.build_type_id ? options.build_type_id:0;
+    var buildAreasIndex=0, buildTypesIndex=0;
+    for (let i in that.data.buildAreas){
+      if (that.data.buildAreas[i].id == area_type_id)
+        buildAreasIndex=i;
+    }
+    for (let i in that.data.buildTypes){
+      if (that.data.buildTypes[i].id == build_type_id)
+        buildTypesIndex = i;
+    }
+    that.setData({
+      area_type_id: area_type_id,
+      build_type_id: build_type_id,
+      buildAreasIndex: buildAreasIndex,
+      buildTypesIndex: buildTypesIndex
+    })
     that.getBannerData();
     this.getBuildingList();
 
@@ -111,6 +131,28 @@ Page({
     });
   },
   /**
+   * 点击轮播图
+   */
+  clickBannerItem(e){
+    var that=this;
+    var type=e.currentTarget.dataset.type;
+    var id=e.currentTarget.dataset.id;
+    switch(type){
+      case 'company': wx.navigateTo({
+        url: '/pages/one-building/one-building?type='+type+'&company_id='+id
+      });break;
+      case 'build': wx.navigateTo({
+        url: '/pages/one-building/one-building?type=' + type + '&build_id=' + id
+      }); break;
+    }
+   
+  },
+  goSearch(){
+    wx.navigateTo({
+      url: '/pages/search/search?searchfrom=2',
+    })
+  },
+  /**
    * 获取楼盘列表
    */
   getBuildingList() {
@@ -121,20 +163,38 @@ Page({
     wx.showLoading({
       title: '加载中..',
     })
-    allM.getbuildsData(that.data.build_type_id, that.data.area_type_id, that.data.page, (data) => {
-      wx.hideLoading();
-      let oldData = that.data.buildingList;
-      let newData = data.data ? data.data:[];
-      that.setData({
-        buildingList: oldData.concat(newData),
-        loading: false
-      });
-      if (!data.has_more){
+    if(that.data.build_type_id<=2){
+      allM.getbuildCompanys(that.data.build_type_id, that.data.area_type_id, that.data.page, (data) => {
+        wx.hideLoading();
+        let oldData = that.data.buildingList;
+        let newData = data.data ? data.data : [];
         that.setData({
-          noMore:true
-        })
-      }
-    });
+          buildingList: oldData.concat(newData),
+          loading: false
+        });
+        if (!data.has_more) {
+          that.setData({
+            noMore: true
+          })
+        }
+      });
+    }else{
+      allM.getbuildsData(that.data.build_type_id, that.data.area_type_id, that.data.page, (data) => {
+        wx.hideLoading();
+        let oldData = that.data.buildingList;
+        let newData = data.data ? data.data : [];
+        that.setData({
+          buildingList: oldData.concat(newData),
+          loading: false
+        });
+        if (!data.has_more) {
+          that.setData({
+            noMore: true
+          })
+        }
+      });
+    }
+   
   },
   /**
    * 切换楼盘类型
@@ -176,8 +236,10 @@ Page({
   goBuildingDetail(e){
     var that=this;
     var build_id=e.currentTarget.id;
+    var type=that.data.build_type_id>2?'build':'company';
+    var company_id = e.currentTarget.dataset.company_id;
     wx.navigateTo({
-      url: '/pages/one-building/one-building?build_id=' + build_id,
+      url: '/pages/one-building/one-building?build_id=' + build_id + '&type=' + type + '&company_id=' + company_id,
     })
   },
   /**
