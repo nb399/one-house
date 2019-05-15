@@ -16,18 +16,32 @@ Page({
         name:'全部楼盘',
         url:'/pages/all-building/all-building?build_type_id=0'
       }, {
-        icon: '/imgs/icon/icon-jijiang.png',
-        name: '即将拿证',
-        url: '/pages/all-building/all-building?build_type_id=2'
-      }, {
-        icon: '/imgs/icon/icon-gongshi.png',
-        name: '正在公示',
-        url: '/pages/all-building/all-building?build_type_id=3'
-      }, {
         icon: '/imgs/icon/icon-dengji.png',
-        name: '正在登记',
-        url: '/pages/all-building/all-building?build_type_id=4'
-      }
+        name: '在售楼盘',
+        url: '/pages/all-building/all-building?build_type_id=0'
+      }, {
+        icon: '/imgs/icon/icon-shidi.png',
+        name: '实地盘跑',
+        url: '/pages/pbl/pbl',
+        urlType: 2,//urlType:2=switchTab
+      }, {
+        icon: '/imgs/icon/icon-yuyue.png',
+        name: '搜索',
+        url: '/pages/search/search',
+      } 
+      //,{
+      //   icon: '/imgs/icon/icon-jijiang.png',
+      //   name: '即将拿证',
+      //   url: '/pages/all-building/all-building?build_type_id=2'
+      // }, {
+      //   icon: '/imgs/icon/icon-gongshi.png',
+      //   name: '正在公示',
+      //   url: '/pages/all-building/all-building?build_type_id=3'
+      // }, {
+      //   icon: '/imgs/icon/icon-dengji.png',
+      //   name: '正在登记',
+      //   url: '/pages/all-building/all-building?build_type_id=4'
+      // }
       //, {
       //   icon: '/imgs/icon/icon-jijiangyaohao.png',
       //   name: '即将摇号',
