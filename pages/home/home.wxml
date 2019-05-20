@@ -29,10 +29,10 @@
   <view class="index-grey-bar"></view>
 
   <view class="tab-section">
-    <navigator wx:for="{{tabList}}" class="tab-item" url="{{item.url}}" open-type='{{item.urlType==3?"switchTab":"navigate"}}'>
+    <view wx:for="{{tabList}}" class="tab-item" data-url="{{item.url}}" data-item='{{item}}' bindtap='clickTap'>
     <image src="{{item.icon}}"></image>
-      <text>{{item.name}}</text>
-    </navigator>
+      <text style="color:{{index==3?'#3795f5':''}}">{{item.name}}</text>
+    </view>
   </view>
 
   <!--Main-->

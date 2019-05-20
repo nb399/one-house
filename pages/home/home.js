@@ -16,10 +16,6 @@ Page({
         name:'全部楼盘',
         url:'/pages/all-building/all-building?build_type_id=0'
       }, {
-        icon: '/imgs/icon/icon-dengji.png',
-        name: '在售楼盘',
-        url: '/pages/all-building/all-building?build_type_id=0'
-      }, {
         icon: '/imgs/icon/icon-shidi.png',
         name: '实地盘跑',
         url: '/pages/pbl/pbl',
@@ -28,6 +24,10 @@ Page({
         icon: '/imgs/icon/icon-yuyue.png',
         name: '搜索',
         url: '/pages/search/search',
+      }, {
+        icon: '/imgs/icon/one-house3.png',
+        name: '快速订阅',
+        imgUrl: "https://nb399.oss-cn-hangzhou.aliyuncs.com/fang/one-house123456.jpg"
       } 
       //,{
       //   icon: '/imgs/icon/icon-jijiang.png',
@@ -75,6 +75,26 @@ Page({
     that.setData({
       swiperIndex: swiperIndex
     })
+  },
+  clickTap(e){
+    let that=this;
+    console.log(e)
+    let item=e.currentTarget.dataset.item;
+if(item.url){
+  if (item.urlType==2){
+    wx.switchTab({
+      url: item.url,
+    })
+  }else{
+    wx.navigateTo({
+      url: item.url,
+    })
+  }
+}else{
+  wx.previewImage({
+    urls: [item.imgUrl],
+  })
+}
   },
   /**
    * 轮播往左
